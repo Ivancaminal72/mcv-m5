@@ -1,8 +1,6 @@
-# mcv-m5
-Master in Computer Vision - M5 Visual recognition
 
-## Team members
-[Team9] Lorenzo Betto, Noa Mor, Ana Caballero Cano.
+## M5 Project - Team members:
+Team9: Lorenzo Betto, Noa Mor, Ana Caballero Cano.
 
 
 
