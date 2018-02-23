@@ -20,6 +20,6 @@ Ana Caballero Cano: ana.caballero.cano@gmail.com
 Ivan Caminal Colell: ivancaminal72@gmail.com
 
 ## Overleaf article
-Link to the Overleaf [article](https://www.overleaf.com/13898040xvmgkgtptqnm#/53860354/), i.e. the report of the project.
+Link to the Overleaf [article](https://www.overleaf.com/read/rwdjpbdgsbdk), i.e. the report of the project.
 
 #### Summaries of the two papers: <a href="https://drive.google.com/open?id=1M0HRZNI0OJJiaiefAOT1j8ABFqY55E2JLAgv--reY1E">VGG</a>, <a href="https://drive.google.com/open?id=1eKTcFKF5oGYx-GdWhsLea28V4AF49iJHj9ZHYdvrcas">SqueezeNet</a>
