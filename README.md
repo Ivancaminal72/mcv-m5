@@ -7,7 +7,7 @@ The goal of the project is to perform object detection, segmentation and recogni
 
 ## Team Info & Contacts
 
-Team 9 (also known as למלם, pronounced as "Lam Lam")
+Team 9 (also known as למלם, pronounced "Lam Lam")
 
 #### Team Members:
 
