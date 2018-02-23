@@ -23,5 +23,7 @@ Ivan Caminal Colell: ivancaminal72@gmail.com
 Link to the Overleaf [article](https://www.overleaf.com/13898040xvmgkgtptqnm#/53860354/), i.e. the report of the project.
 
 ## Article's summaries links
+VGG: 
 https://drive.google.com/open?id=1M0HRZNI0OJJiaiefAOT1j8ABFqY55E2JLAgv--reY1E
+SQUEEZENET:
 https://drive.google.com/open?id=1eKTcFKF5oGYx-GdWhsLea28V4AF49iJHj9ZHYdvrcas
