@@ -1,30 +1,12 @@
+## M5 Project: Scene Understanding for Autonomous Vehicles
+The goal of the project is to perform object detection, segmentation and recognition using Deep Learning in the context of scene understanding for autonomous vehicles. The network's goal will be to successfully compute the aforementioned tasks on classes like pedestrians, vehicles, road, etc.
 
-## M5 Project - Team members:
-Team9: Lorenzo Betto, Noa Mor, Ana Caballero Cano.
+![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
 
+## Team 9 - Members & Contact Info
+Lorenzo Betto: smemo23@gmail.com
+Noa Mor: noamor87@gmail.com
+Ana Caballero Cano: ana.caballero.cano@gmail.com
 
-
-
-## Project description
-Download the [Overleaf document](https://www.overleaf.com/read/qrjbtzwtjhmx)
-
-## Project slides
-- Google slides for [Week 1](https://docs.google.com/presentation/d/1A6hgbNn8N-Iq8MhSa_RPIyf87DBL6PCtoDzy1zqS5Xs/edit?usp=sharing)
-- Google slides for Week 2 (T.B.A.)
-- Google slides for Week 3 (T.B.A.)
-- Google slides for Week 4 (T.B.A.) 
-- Google slides for Week 5 (T.B.A.)
-- Google slides for Week 6 (T.B.A.)
-- Google slides for Week 7 (T.B.A.)
-
-## Peer review
-- Intra-group evaluation form for Week 2 (T.B.A.)
-- Intra-group evaluation form for Weeks 3/4 (T.B.A.)
-- Intra-group evaluation form for Weeks 5/6 (T.B.A.)
-- Intra-group evaluation form for Week 7 (T.B.A.)
-
-## News
- - Improve your GitHub account following [this document](https://docs.google.com/document/d/14oxSKWBbMajIB5Bn2CM-DNb-vychY1f393qYfsHNJfY/edit?usp=sharing)
-
-## Groups
-   (T.B.A.)
+## Overleaf article
+Link to the Overleaf [article](https://www.overleaf.com/13898040xvmgkgtptqnm#/53860354/)
