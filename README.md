@@ -17,5 +17,7 @@ Noa Mor: noamor87@gmail.com
 
 Ana Caballero Cano: ana.caballero.cano@gmail.com
 
+Ivan Caminal Colell: ivancaminal72@gmail.com
+
 ## Overleaf article
 Link to the Overleaf [article](https://www.overleaf.com/13898040xvmgkgtptqnm#/53860354/), i.e. the report of the project.
