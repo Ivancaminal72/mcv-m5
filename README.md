@@ -5,11 +5,11 @@ The goal of the project is to perform object detection, segmentation and recogni
 <img src="https://github.com/BourbonCreams/mcv-m5/blob/master/imgs/introduction.jpg" width="600"/>
 </p>
 
-## Team Info
+## Team Info & Contacts
 
 Team 9 (also known as למלם, pronounced as "Lam Lam")
 
-Team Members:
+#### Team Members:
 
 Lorenzo Betto: smemo23@gmail.com
 
