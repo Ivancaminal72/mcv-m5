@@ -1,8 +1,11 @@
 # mcv-m5
 Master in Computer Vision - M5 Visual recognition
 
-## Fork this project
-Fork this project to start your group project. Add [robertbenavente](https://github.com/robertbenavente) and [lluisgomez](https://github.com/lluisgomez/) as contributors.
+## Team members
+[Team9] Lorenzo Betto, Noa Mor, Ana Caballero Cano.
+
+
+
 
 ## Project description
 Download the [Overleaf document](https://www.overleaf.com/read/qrjbtzwtjhmx)
