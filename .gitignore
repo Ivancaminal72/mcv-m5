@@ -1,2 +1,4 @@
 **/*.pyc
 **/*.idea
+**/*.png
+code/datatmp/*
