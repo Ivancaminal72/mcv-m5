@@ -421,7 +421,8 @@ class ImageDataGenerator(object):
                             batch_size=32, shuffle=True, seed=None,
                             gt_directory=None,
                             save_to_dir=None, save_prefix='',
-                            save_format='jpeg'):
+                            save_format='jpeg',
+			    order = 1):
         return DirectoryIterator(
             directory, self, resize=resize,
             target_size=target_size, color_mode=color_mode,
@@ -430,7 +431,8 @@ class ImageDataGenerator(object):
             batch_size=batch_size, shuffle=shuffle, seed=seed,
             gt_directory=gt_directory,
             save_to_dir=save_to_dir, save_prefix=save_prefix,
-            save_format=save_format)
+            save_format=save_format,
+	    order = order)
 
     def flow_from_directory2(self, directory,
                              resize=None, target_size=(256, 256),
@@ -440,7 +442,7 @@ class ImageDataGenerator(object):
                              gt_directory=None,
                              save_to_dir=None, save_prefix='',
                              save_format='jpeg', directory2=None,
-                             gt_directory2=None, batch_size2=None):
+                             gt_directory2=None, batch_size2=None,order=1):
         return DirectoryIterator2(
             directory, self, resize=resize,
             target_size=target_size, color_mode=color_mode,
@@ -451,7 +453,7 @@ class ImageDataGenerator(object):
             save_to_dir=save_to_dir, save_prefix=save_prefix,
             save_format=save_format,
             directory2=directory2, gt_directory2=gt_directory2,
-            batch_size2=batch_size2)
+            batch_size2=batch_size2,order=order)
 
     def standardize(self, x, y=None):
         if self.imageNet:
@@ -1112,7 +1114,7 @@ class DirectoryIterator(Iterator):
                  dim_ordering='default',
                  classes=None, class_mode='categorical',
                  batch_size=32, shuffle=True, seed=None, gt_directory=None,
-                 save_to_dir=None, save_prefix='', save_format='jpeg'):
+                 save_to_dir=None, save_prefix='', save_format='jpeg',order =1):
         # Check dim order
         if dim_ordering == 'default':
             dim_ordering = K.image_dim_ordering()
@@ -1125,7 +1127,7 @@ class DirectoryIterator(Iterator):
         self.save_to_dir = save_to_dir
         self.save_prefix = save_prefix
         self.save_format = save_format
-
+  	self.order = order
         # Check target size
         if target_size is None and batch_size > 1:
             raise ValueError('Target_size None works only with batch_size=1')
@@ -1242,7 +1244,7 @@ class DirectoryIterator(Iterator):
                 # Load GT image
                 gt_img = load_img(os.path.join(self.gt_directory, fname),
                                   grayscale=True,
-                                  resize=self.resize, order=0)
+                                  resize=self.resize, order=self.order)
                 y = img_to_array(gt_img, dim_ordering=self.dim_ordering)
             else:
                 y = None
@@ -1334,7 +1336,7 @@ class DirectoryIterator2(object):
                  classes=None, class_mode='categorical',
                  batch_size=32, shuffle=True, seed=None, gt_directory=None,
                  save_to_dir=None, save_prefix='', save_format='jpeg',
-                 directory2=None, gt_directory2=None, batch_size2=None):
+                 directory2=None, gt_directory2=None, batch_size2=None,order=1):
 
         self.DI1 = DirectoryIterator(
             directory, image_data_generator, resize=resize,
@@ -1344,7 +1346,7 @@ class DirectoryIterator2(object):
             batch_size=batch_size, shuffle=shuffle, seed=seed,
             gt_directory=gt_directory,
             save_to_dir=save_to_dir, save_prefix=save_prefix,
-            save_format=save_format)
+            save_format=save_format,order = order)
 
         self.DI2 = DirectoryIterator(
             directory2, image_data_generator, resize=resize,
@@ -1354,7 +1356,7 @@ class DirectoryIterator2(object):
             batch_size=batch_size2, shuffle=shuffle, seed=seed,
             gt_directory=gt_directory2,
             save_to_dir=save_to_dir, save_prefix=save_prefix,
-            save_format=save_format)
+            save_format=save_format,order=order)
 
     def next(self):
         batch_x1, batch_y1 = self.DI1.next()

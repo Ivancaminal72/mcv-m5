@@ -5,7 +5,7 @@ dataset_name2                = None            # Second dataset name. None if no
 perc_mb2                     = None            # Percentage of data from the second dataset in each minibatch
 
 # Model
-model_name                   = 'lamlam'          # Model to use ['fcn8' | 'lenet' | 'alexNet' | 'vgg16' |  'vgg19' | 'resnet50' | 'InceptionV3']
+model_name                   = 'vgg16'          # Model to use ['fcn8' | 'lenet' | 'alexNet' | 'vgg16' |  'vgg19' | 'resnet50' | 'InceptionV3']
 freeze_layers_from           = None            # Freeze layers from 0 to this layer during training (Useful for finetunning) [None | 'base_model' | Layer_id]
 show_model                   = False           # Show the architecture layers
 load_imageNet                = False           # Load Imagenet weights and normalize following imagenet procedure
@@ -58,9 +58,9 @@ save_results_n_legend_rows   = 1               # Number of rows when showwing th
 
 # Callback early stoping
 earlyStopping_enabled        = True            # Enable the Callback
-earlyStopping_monitor        = 'acc'           # Metric to monitor
+earlyStopping_monitor        = 'val_acc'       # Metric to monitor
 earlyStopping_mode           = 'max'           # Mode ['max' | 'min']
-earlyStopping_patience       = 100             # Max patience for the early stopping
+earlyStopping_patience       = 2             # Max patience for the early stopping
 earlyStopping_verbose        = 0               # Verbosity of the early stopping
 
 # Callback model check point

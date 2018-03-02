@@ -42,13 +42,14 @@ def process(cf):
 
     if cf.test_model:
         # Compute validation metrics
-        model.test(valid_gen)
+	    #model.test(valid_gen)
+
         # Compute test metrics
         model.test(test_gen)
 
     if cf.pred_model:
         # Compute validation metrics
-        model.predict(valid_gen, tag='pred')
+        #model.predict(valid_gen, tag='pred')
         # Compute test metrics
         model.predict(test_gen, tag='pred')
 
@@ -102,7 +103,8 @@ def main():
     dataset_path = os.path.join(local_path, 'Datasets')
     shared_dataset_path = os.path.join(shared_path, 'Datasets')
     experiments_path = os.path.join(local_path, getuser(), 'Experiments')
-    shared_experiments_path = os.path.join(shared_path, getuser(), 'Experiments')
+    #shared_experiments_path = os.path.join(shared_path, getuser(), 'Experiments')
+    shared_experiments_path = experiments_path
     usr_path = os.path.join('/home/', getuser())
 
     # Load configuration files
@@ -116,8 +118,8 @@ def main():
     process(cf)
 
     # Copy result to shared directory
-    if False: #cant copy to shared folder (shared is where the database)-- READ ONLY
-    	configuration.copy_to_shared()
+    # cant copy to shared folder (shared is where the database)-- READ ONLY
+    # configuration.copy_to_shared()
 
 
 # Entry point of the script

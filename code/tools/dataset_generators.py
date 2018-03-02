@@ -62,8 +62,8 @@ class Dataset_Generators():
                 cf.dataset.cb_weights = dg_tr.cb_weights
 
             # Load training data
-            if not cf.dataset_name2:
-                train_gen = dg_tr.flow_from_directory(directory=cf.dataset.path_train_img,
+            if not cf.dataset_name:
+		train_gen = dg_tr.flow_from_directory(directory=cf.dataset.path_train_img,
                                                       gt_directory=cf.dataset.path_train_mask,
                                                       resize=cf.resize_train,
                                                       target_size=cf.target_size_train,
@@ -75,7 +75,8 @@ class Dataset_Generators():
                                                       seed=cf.seed_train,
                                                       save_to_dir=cf.savepath if cf.da_save_to_dir else None,
                                                       save_prefix='data_augmentation',
-                                                      save_format='png')
+                                                      save_format='png',
+						      order=cf.interpolation_order)
             else:
                 train_gen = dg_tr.flow_from_directory2(directory=cf.dataset.path_train_img,
                                                        gt_directory=cf.dataset.path_train_mask,
@@ -92,8 +93,8 @@ class Dataset_Generators():
                                                        save_format='png',
                                                        directory2=cf.dataset2.path_train_img,
                                                        gt_directory2=cf.dataset2.path_train_mask,
-                                                       batch_size2=int(cf.batch_size_train*cf.perc_mb2)
-                                                       )
+                                                       batch_size2=int(cf.batch_size_train*cf.perc_mb2),
+						       order=cf.interpolation_order)
 
             # Load validation set
             print ('\n > Reading validation set...')
@@ -119,14 +120,16 @@ class Dataset_Generators():
                                                   class_mode=cf.dataset.class_mode,
                                                   batch_size=cf.batch_size_valid,
                                                   shuffle=cf.shuffle_valid,
-                                                  seed=cf.seed_valid)
+                                                  seed=cf.seed_valid,
+						  order=cf.interpolation_order)
         else:
             train_gen = None
             valid_gen = None
 
         if cf.test_model or cf.pred_model:
             # Load testing set
-            print ('\n > Reading testing set...')
+            print ('\n > Reading testing set...2')
+            print(type(cf.interpolation_order))
             dg_ts = ImageDataGenerator(imageNet=cf.norm_imageNet_preprocess,
                                        rgb_mean=mean,
                                        rgb_std=std,
@@ -140,6 +143,7 @@ class Dataset_Generators():
                                        crop_size=cf.crop_size_test,
                                        dim_ordering='default',
                                        class_mode=cf.dataset.class_mode)
+
             test_gen = dg_ts.flow_from_directory(directory=cf.dataset.path_test_img,
                                                  gt_directory=cf.dataset.path_test_mask,
                                                  resize=cf.resize_test,
@@ -149,9 +153,11 @@ class Dataset_Generators():
                                                  class_mode=cf.dataset.class_mode,
                                                  batch_size=cf.batch_size_test,
                                                  shuffle=cf.shuffle_test,
-                                                 seed=cf.seed_test)
+                                                 seed=cf.seed_test,
+					         order=cf.interpolation_order)
 
         else:
             test_gen = None
+	    
 
         return (train_gen, valid_gen, test_gen)
