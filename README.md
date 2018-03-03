@@ -78,6 +78,8 @@ Custom loss:			  Loss with Belgium traffic signs dataset:
 Not implementable!
 
 ## Task Cii: Implement a new network
+Our own CNN implementation, we named it LamLam (as our team)
+It has wo parallel sequential processes of convolutional layers of different sizes with allows to capture two different types of information.
 
 ## Instructions for using the code
 
