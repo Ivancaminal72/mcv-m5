@@ -38,13 +38,10 @@ Task Cii: We implemented a new CNN (LamLam) with two parallel sequential process
 Task E: We wrote the report
 
 #### Short explanation of the code in the repository
-Task A:
-We have created a bash script that returns 3 txt (train, test, val) that contains a list
-"subfolder_name; number_of_images".
-
+Task A: We have created a bash script that returns 3 txt (train, test, val) that contains a list "subfolder_name; number_of_images".
 Task B: Not implementable
-
-Task Cii:
+Task Cii: Our own CNN implementation, we named it LamLam (as our team)
+It has wo parallel sequential processes of convolutional layers of different sizes with allows to capture two different types of information.
 
 #### Results of the different experiments
 Task A. Run the provided code
@@ -78,8 +75,7 @@ Custom loss:			  Loss with Belgium traffic signs dataset:
 Not implementable!
 
 ## Task Cii: Implement a new network
-Our own CNN implementation, we named it LamLam (as our team)
-It has wo parallel sequential processes of convolutional layers of different sizes with allows to capture two different types of information.
+
 
 ## Instructions for using the code
 
