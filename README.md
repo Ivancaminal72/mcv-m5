@@ -82,6 +82,7 @@ Not implementable!
 ## Instructions for using the code
 
 ## Indicate the level of completeness of the goals of this week 
+100% 
 
 ## Link to the Google Slide presentation
 <a href="https://drive.google.com/open?id=1xdwzScs1yIeNa9y7kvcai-PCpIQG_0BUL5POIirqQiM">Slides Week 2 </a>
