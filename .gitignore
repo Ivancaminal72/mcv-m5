@@ -2,3 +2,4 @@
 **/*.idea
 **/*.png
 code/datatmp/*
+**/*.save

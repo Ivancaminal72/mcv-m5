@@ -51,6 +51,7 @@ class Dataset_Generators():
                 # if cf.cb_weights_method is None:
                 #     dg_tr.fit_from_directory(cf.dataset.path_train_img)
                 # else:
+		print(cf.dataset.path_train_img)
                 dg_tr.fit_from_directory(cf.dataset.path_train_img,
                                          cf.dataset.path_train_mask,
                                          len(cf.dataset.classes),
@@ -62,7 +63,7 @@ class Dataset_Generators():
                 cf.dataset.cb_weights = dg_tr.cb_weights
 
             # Load training data
-            if not cf.dataset_name:
+            if not cf.dataset_name2:
 		train_gen = dg_tr.flow_from_directory(directory=cf.dataset.path_train_img,
                                                       gt_directory=cf.dataset.path_train_mask,
                                                       resize=cf.resize_train,
@@ -128,8 +129,7 @@ class Dataset_Generators():
 
         if cf.test_model or cf.pred_model:
             # Load testing set
-            print ('\n > Reading testing set...2')
-            print(type(cf.interpolation_order))
+            print ('\n > Reading testing set...')
             dg_ts = ImageDataGenerator(imageNet=cf.norm_imageNet_preprocess,
                                        rgb_mean=mean,
                                        rgb_std=std,

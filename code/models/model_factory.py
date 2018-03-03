@@ -10,6 +10,7 @@ from keras.utils.vis_utils import plot_model
 #from models.alexNet import build_alexNet
 from models.vgg import build_vgg
 from models.lamlam import build_lamlam
+from models.lamlam_spp import build_lamlam_spp
 #from models.resnet import build_resnet50
 #from models.inceptionV3 import build_inceptionV3
 
@@ -75,8 +76,9 @@ class Model_Factory():
     # Creates a Model object (not a Keras model)
     def make(self, cf, optimizer=None):
         if cf.model_name in ['lenet', 'alexNet', 'vgg16', 'vgg19', 'resnet50',
-                             'InceptionV3', 'fcn8', 'unet', 'segnet','lamlam',
-                             'segnet_basic', 'resnetFCN', 'yolo', 'tiny-yolo']:
+                             'InceptionV3', 'fcn8', 'unet', 'segnet',
+                             'segnet_basic', 'resnetFCN', 'yolo', 'tiny-yolo',
+			     'lamlam', 'lamlam_spp']:
             if optimizer is None:
                 raise ValueError('optimizer can not be None')
 
@@ -139,6 +141,9 @@ class Model_Factory():
             model = build_lamlam(in_shape, cf.dataset.n_classes, 16, cf.weight_decay,
                               load_pretrained=cf.load_imageNet,
                               freeze_layers_from=cf.freeze_layers_from)
+        elif cf.model_name == 'lamlam_spp':
+            model = build_lamlam(in_shape, cf.dataset.n_classes, cf.weight_decay,
+                              load_pretrained=cf.load_imageNet)
         elif cf.model_name == 'vgg19':
             model = build_vgg(in_shape, cf.dataset.n_classes, 19, cf.weight_decay,
                               load_pretrained=cf.load_imageNet,
