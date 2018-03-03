@@ -32,32 +32,33 @@ Link to the Overleaf [article](https://www.overleaf.com/read/rwdjpbdgsbdk), i.e.
 
 ## Task A: Run the code
 #### Short abstract about what you implemented (5 lines max)
-Task A: Bash file to output the number of samples of each folder.
-Task B: Not implementable
-Task Cii: We implemented a new CNN (LamLam) with two parallel sequential processes of convolutional layers.
+Task A: Bash file to output the number of samples of each folder. <br/>
+Task B: Not implementable  <br/>
+Task Cii: We implemented a new CNN (LamLam) with two parallel sequential processes of convolutional layers.  <br/>
 Task E: We wrote the report
 
 #### Short explanation of the code in the repository
-Task A: We have created a bash script that returns 3 txt (train, test, val) that contains a list "subfolder_name; number_of_images".
-Task B: Not implementable
-Task Cii: Our own CNN implementation, we named it LamLam (as our team)
-It has wo parallel sequential processes of convolutional layers of different sizes with allows to capture two different types of information.
+Task A: We have created a bash script that returns 3 txt (train, test, val) that contains a list "subfolder_name; number_of_images".  <br/>
+Task B: Not implementable  <br/>
+Task Cii: Our own CNN implementation, we named it LamLam (as our team). 
+It has two parallel sequential processes of convolutional layers of different sizes with allows to capture two different types of information.
 
 #### Results of the different experiments
 Task A. Run the provided code
-Analyze the dataset: 
+### Analyze the dataset: 
 The images are 64x64 pixels and differ in point of view, background, illumination and HUE. Furthermore, some images are slightly blurred.
 
-Count the number of samples per class:
-16527 for training, 
-644 for validation 
-8190 for testing. 
+### Count the number of samples per class:
+16527 for training,  <br/>
+644 for validation   <br/>
+8190 for testing.  <br/>
 
-To know the number of samples per class follow the link:
+To know the number of samples per class follow the link:  <br/>
 <a href="https://drive.google.com/open?id=1NHeXsCl0G7QeRQZ1zyJq4GQdM6JjK0EQ1RyuQMIPJic">Google Sheets</a>
 
 #### Accuracy of train/test
-Accuracy Train: 97.7 %;  Accuracy Test: 95.2 %
+Accuracy Train: 97.7 %;  <br/>
+Accuracy Test: 95.2 %  <br/>
 The accuracy of train is better  than in the test set, as we expected.
 
 #### For the this case which one provides better results, crop or resize?
@@ -67,8 +68,10 @@ On this dataset crop useless because images are already cropped, so resize it’
 The mean subtraction takes place in the ImageDataGenerator, setting norm_featurewise_center to ‘True’.
 
 #### Fine-tune the classification for the Belgium traffic signs dataset.
-Custom accuracy:		Accuracy with Belgium traffic signs dataset:
-Custom loss:			  Loss with Belgium traffic signs dataset:
+Custom accuracy:		 <br/>
+Accuracy with Belgium traffic signs dataset:  <br/>
+Custom loss:			 <br/>
+Loss with Belgium traffic signs dataset:  <br/>
 
 
 ## TASK B: Train a network on another dataset
