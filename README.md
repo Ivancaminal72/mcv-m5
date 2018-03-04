@@ -75,17 +75,17 @@ Loss with Belgium traffic signs dataset:  <br/>
 
 
 ## TASK B: Train a network on another dataset
-Not implementable!
-
+We run the KITTI dataset foor the training and the validation datasets since the test set is private and we can'nt acceed to it.
 
 ## Task Cii: Implement a new network
 
 ## Task D: Boost the performance of your network
-We boost the performance of the network by we using a SPP layer (spatial pyramid pooling) instead of a costum pooling layer in the end of each tower (for Concatenating the two towers their shape must agree). \\
- In addition this layer makes the model indifferent image size. \\
-The Training is done over TT100K dataset and  testing is done over  the Belgium database. On the way to try to create a generic model. \\
+We boost the performance of the network by we using a SPP layer (spatial pyramid pooling) instead of a costum pooling layer in the end of each tower (for Concatenating the two towers their shape must agree).<br/>
+ In addition this layer makes the model indifferent image size.<br/>
+The Training is done over TT100K dataset and  testing is done over  the Belgium database. On the way to try to create a generic model. <br/>
 
 ## Instructions for using the code
+CUDA_VISIBLE_DEVICES=0 python train.py -c config/dataset.py -e expName
 
 ## Indicate the level of completeness of the goals of this week 
 100% 
