@@ -33,15 +33,15 @@ Link to the Overleaf [article](https://www.overleaf.com/read/rwdjpbdgsbdk), i.e.
 ## Task A: Run the code
 #### Short abstract about what you implemented (5 lines max)
 Task A: Bash file to output the number of samples of each folder. <br/>
-Task B: We ran the code for KITTI dataset, for trainning and validation  <br/>
+Task B: We ran the code for KITTI dataset, for training and validation  <br/>
 Task Cii: We implemented a new CNN (LamLam) with two parallel sequential processes of convolutional layers.  <br/>
 Task E: We wrote the report
 
 #### Short explanation of the code in the repository
-Task A: We have created a bash script that returns 3 txt (train, test, val) that contains a list "subfolder_name; number_of_images".  <br/>
-Task B: Not implementable  <br/>
+Task A: We have created a bash script that returns 3 txt (train, test, val) that contain a list "subfolder_name; number_of_images".  <br/>
+Task B: We ran the code for the KITTY, for trainning and validation. Not for test  <br/>
 Task Cii: Our own CNN implementation, we named it LamLam (as our team). 
-It has two parallel sequential processes of convolutional layers of different sizes with allows to capture two different types of information.
+It has two parallel sequential processes of convolutional layers of different sizes that allows to capture two different types of information.
 
 #### Results of the different experiments
 Task A. Run the provided code
