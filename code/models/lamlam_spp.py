@@ -24,7 +24,7 @@ import math
 
 # Paper: https://arxiv.org/pdf/1409.1556.pdf
 
-def build_lamlam_spp(img_shape=(3, 224, 224), n_classes=1000, l2_reg=0.,load_pretrained=False):
+def build_lamlam_spp(img_shape=(3, 224, 224), n_classes=1000, l2_reg=0.,load_pretrained=False, freeze_layers_from='base_model'):
 
       #I. image preprocessing
     x = img_shape[1]
@@ -61,23 +61,28 @@ def build_lamlam_spp(img_shape=(3, 224, 224), n_classes=1000, l2_reg=0.,load_pre
     #pool_size1_2 = np.int(np.ceil(np.divide(out1_after_conv[1],final_y)))
     #pool_size2_1 = np.int(np.ceil(np.divide(out2_after_conv[0],final_x)))
     #pool_size2_2 = np.int(np.ceil(np.divide(out2_after_conv[1],final_y)))
-
+    # freeze layers for fine tunning
+    train_layer_flag = False 
+    if freeze_layers_from is not None:
+        if freeze_layers_from == 'base_model':
+            print ('   Freezing base model layers')
+            train_layer_flag = False 
     input_shape = Input(shape=img_shape)
     # tower_1 : texture - small filter
-    tower_1 = Conv2D(output1_conv,(filt_size1_1,filt_size1_2),strides = (stride1_1,stride1_2),padding='same',activation = activ1,name='tower1_conv2')(input_shape)
+    tower_1 = Conv2D(output1_conv,(filt_size1_1,filt_size1_2),strides = (stride1_1,stride1_2),padding='same',activation = activ1,trainable=train_layer_flag,name='tower1_conv2')(input_shape)
 
     tower_1 = BatchNormalization()(tower_1)
     tower_1 = SpatialPyramidPooling([1,2,4])(tower_1)
     #tower_1 = MaxPooling2D((pool_size1_1,pool_size1_2),name='tower1_pool')(tower_1)
     # tower_2 : behavair- organization - bigger filter
-    tower_2 = Conv2D(output2_conv,(filt_size2_1,filt_size2_2),strides = (stride2_1,stride2_2),padding='same',activation = activ2,name='tower2_conv2')(input_shape)
+    tower_2 = Conv2D(output2_conv,(filt_size2_1,filt_size2_2),strides = (stride2_1,stride2_2),padding='same',activation = activ2,trainable=train_layer_flag,name='tower2_conv2')(input_shape)
     tower_2 = BatchNormalization()(tower_2)
     tower_2 = SpatialPyramidPooling([1,2,4])(tower_2)
     #tower_2 = MaxPooling2D((pool_size2_1,pool_size2_2),name='tower2_pool')(tower_2)
 
     # merging towers
     merged = concatenate([tower_1,tower_2],axis=-1)
-    merged = Flatten()(merged)
+    #merged = Flatten()(merged)
     # dense layers
     out = Dense(output_fc,activation=activ_fc,name='fc')(merged)
     out = BatchNormalization()(out)
@@ -85,6 +90,11 @@ def build_lamlam_spp(img_shape=(3, 224, 224), n_classes=1000, l2_reg=0.,load_pre
     out = Dense(n_classes,activation='softmax',name='predictions')(out)
 	# Build a new model ( input the sane, output in the x layer)
     model = Model(input=input_shape, output=out)
+    #if freeze_layers_from is not None:
+    #    if freeze_layers_from == 'base_model':
+    #        print ('   Freezing base model layers')
+    #        for layer in merged.layers:
+    #            layer.trainable = False
     #model.summary()
 	# dont train the layers in base mode:l
     #model.compile(loss='categorical_crossentropy',optimizer=optimizers.Adadelta(lr=lr), metrics=['accuracy'])

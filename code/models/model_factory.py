@@ -142,8 +142,8 @@ class Model_Factory():
                               load_pretrained=cf.load_imageNet,
                               freeze_layers_from=cf.freeze_layers_from)
         elif cf.model_name == 'lamlam_spp':
-            model = build_lamlam(in_shape, cf.dataset.n_classes, cf.weight_decay,
-                              load_pretrained=cf.load_imageNet)
+            model = build_lamlam_spp(in_shape, cf.dataset.n_classes, cf.weight_decay,
+                              load_pretrained=cf.load_imageNet, freeze_layers_from=cf.freeze_layers_from)
         elif cf.model_name == 'vgg19':
             model = build_vgg(in_shape, cf.dataset.n_classes, 19, cf.weight_decay,
                               load_pretrained=cf.load_imageNet,
