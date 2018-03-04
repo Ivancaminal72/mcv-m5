@@ -1,3 +1,5 @@
+# === WEEK 1 ===
+
 ## M5 Project: Scene Understanding for Autonomous Vehicles
 The goal of the project is to perform object detection, segmentation and recognition using Deep Learning in the context of scene understanding for autonomous vehicles. The network's goal will be to successfully compute the aforementioned tasks on classes like pedestrians, vehicles, road, etc.
 
@@ -24,3 +26,72 @@ Link to the Overleaf [article](https://www.overleaf.com/read/rwdjpbdgsbdk), i.e.
 
 
 #### Summaries of the two papers: <a href="https://drive.google.com/open?id=1M0HRZNI0OJJiaiefAOT1j8ABFqY55E2JLAgv--reY1E">VGG</a>, <a href="https://drive.google.com/open?id=1eKTcFKF5oGYx-GdWhsLea28V4AF49iJHj9ZHYdvrcas">SqueezeNet</a>.
+
+
+# === WEEK 2 ===
+
+## Task A: Run the code
+#### Short abstract about what you implemented (5 lines max)
+Task A: Bash file to output the number of samples of each folder. <br/>
+Task B: We ran the code for KITTI dataset, for trainning and validation  <br/>
+Task Cii: We implemented a new CNN (LamLam) with two parallel sequential processes of convolutional layers.  <br/>
+Task E: We wrote the report
+
+#### Short explanation of the code in the repository
+Task A: We have created a bash script that returns 3 txt (train, test, val) that contains a list "subfolder_name; number_of_images".  <br/>
+Task B: Not implementable  <br/>
+Task Cii: Our own CNN implementation, we named it LamLam (as our team). 
+It has two parallel sequential processes of convolutional layers of different sizes with allows to capture two different types of information.
+
+#### Results of the different experiments
+Task A. Run the provided code
+### Analyze the dataset: 
+The images are 64x64 pixels and differ in point of view, background, illumination and HUE. Furthermore, some images are slightly blurred.
+
+### Count the number of samples per class:
+16527 for training,  <br/>
+644 for validation   <br/>
+8190 for testing.  <br/>
+
+To know the number of samples per class follow the link:  <br/>
+<a href="https://drive.google.com/open?id=1NHeXsCl0G7QeRQZ1zyJq4GQdM6JjK0EQ1RyuQMIPJic">Google Sheets</a>
+
+#### Accuracy of train/test
+Accuracy Train: 97.7 %;  <br/>
+Accuracy Test: 95.2 %  <br/>
+The accuracy of train is better  than in the test set, as we expected.
+
+#### For the this case which one provides better results, crop or resize?
+On this dataset crop useless because images are already cropped, so resize it’s better.
+
+####  Where does the mean subtraction takes place?
+The mean subtraction takes place in the ImageDataGenerator, setting norm_featurewise_center to ‘True’.
+
+#### Fine-tune the classification for the Belgium traffic signs dataset.
+Custom accuracy:		 <br/>
+Accuracy with Belgium traffic signs dataset:  <br/>
+Custom loss:			 <br/>
+Loss with Belgium traffic signs dataset:  <br/>
+
+
+## TASK B: Train a network on another dataset
+We run the KITTI dataset foor the training and the validation datasets since the test set is private and we can'nt acceed to it.
+
+## Task Cii: Implement a new network
+
+## Task D: Boost the performance of your network
+We boost the performance of the network by we using a SPP layer (spatial pyramid pooling) instead of a costum pooling layer in the end of each tower (for Concatenating the two towers their shape must agree).<br/>
+ In addition this layer makes the model indifferent image size.<br/>
+The Training is done over TT100K dataset and  testing is done over  the Belgium database. On the way to try to create a generic model. <br/>
+
+## Instructions for using the code
+CUDA_VISIBLE_DEVICES=0 python train.py -c config/dataset.py -e expName
+
+## Indicate the level of completeness of the goals of this week 
+100% 
+
+## Link to the Google Slide presentation
+<a href="https://drive.google.com/open?id=1xdwzScs1yIeNa9y7kvcai-PCpIQG_0BUL5POIirqQiM">Slides Week 2 </a>
+
+# Link to a Google Drive with the weights of the model 
+
