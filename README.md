@@ -33,7 +33,7 @@ Link to the Overleaf [article](https://www.overleaf.com/read/rwdjpbdgsbdk), i.e.
 ## Task A: Run the code
 #### Short abstract about what you implemented (5 lines max)
 Task A: Bash file to output the number of samples of each folder. <br/>
-Task B: Not implementable  <br/>
+Task B: We ran the code for KITTI dataset, for trainning and validation  <br/>
 Task Cii: We implemented a new CNN (LamLam) with two parallel sequential processes of convolutional layers.  <br/>
 Task E: We wrote the report
 
