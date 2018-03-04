@@ -80,7 +80,7 @@ We run the KITTI dataset foor the training and the validation datasets since the
 ## Task Cii: Implement a new network
 We used a CNN that was tested in the Machine Learning course of the same Master program. Such architecture is shown in 
 <p align="center">
-<img src="https://github.com/BourbonCreams/mcv-m5/blob/master/imgs/CNN_LamLam.PNG" width="600"/>
+<img src="https://github.com/BourbonCreams/mcv-m5/blob/master/imgs/CNN_LamLam.PNG" />
 </p>
 
 and it performed well with a classification problem that involved scenery images. <br/>
