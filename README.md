@@ -93,6 +93,10 @@ The model's parameters were optimized using a random search when the model was f
 We boost the performance of the network by we using a SPP layer (spatial pyramid pooling) instead of a costum pooling layer in the end of each tower (for Concatenating the two towers their shape must agree).<br/>
  In addition this layer makes the model indifferent image size.<br/>
 The Training is done over TT100K dataset and  testing is done over  the Belgium database. On the way to try to create a generic model. <br/>
+<p align="center">
+<img src="https://github.com/BourbonCreams/mcv-m5/blob/master/imgs/CNN_Boost_LamLam.png" />
+</p>
+
 
 ## Instructions for using the code
 CUDA_VISIBLE_DEVICES=0 python train.py -c config/dataset.py -e expName
