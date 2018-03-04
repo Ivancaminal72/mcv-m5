@@ -41,7 +41,7 @@ Task E: We wrote the report
 Task A: We have created a bash script that returns 3 txt (train, test, val) that contain a list "subfolder_name; number_of_images".  <br/>
 Task B: We ran the code for the KITTY, for trainning and validation. Not for test  <br/>
 Task Cii: Our own CNN implementation, we named it LamLam (as our team). 
-It has two parallel sequential processes of convolutional layers of different sizes that allows to capture two different types of information.
+It has two parallel sequential processes of convolutional layers of different sizes that allow to capture two different types of information.
 
 #### Results of the different experiments
 Task A. Run the provided code
@@ -59,10 +59,10 @@ To know the number of samples per class follow the link:  <br/>
 #### Accuracy of train/test
 Accuracy Train: 97.7 %;  <br/>
 Accuracy Test: 95.2 %  <br/>
-The accuracy of train is better  than in the test set, as we expected.
+The accuracy of train is better than in the test set, as expected.
 
-#### For the this case which one provides better results, crop or resize?
-On this dataset crop useless because images are already cropped, so resize it’s better.
+#### For this case which one provides better results, crop or resize?
+On this dataset crop useless because images are already cropped, so resize is better.
 
 ####  Where does the mean subtraction takes place?
 The mean subtraction takes place in the ImageDataGenerator, setting norm_featurewise_center to ‘True’.
@@ -75,12 +75,12 @@ Loss with Belgium traffic signs dataset:  <br/>
 
 
 ## TASK B: Train a network on another dataset
-We run the KITTI dataset foor the training and the validation datasets since the test set is private and we can'nt acceed to it.
+We ran the KITTI dataset for the training and the validation datasets since the test set is private and we can't access it.
 
 ## Task Cii: Implement a new network
 We used a CNN that was tested in the Machine Learning course of the same Master program. Such architecture is shown in 
 <p align="center">
-<img src="https://github.com/BourbonCreams/mcv-m5/blob/master/imgs/CNN_LamLam.PNG" />
+<img src="https://github.com/BourbonCreams/mcv-m5/blob/master/imgs/CNN_LamLam.PNG" height=500"/>
 </p>
 
 and it performed well with a classification problem that involved scenery images. <br/>
@@ -90,11 +90,11 @@ The idea that led to the development of a network with two parallel sequential p
 The model's parameters were optimized using a random search when the model was first used, i.e. in the Machine Learning course.	
 
 ## Task D: Boost the performance of your network
-We boost the performance of the network by we using a SPP layer (spatial pyramid pooling) instead of a costum pooling layer in the end of each tower (for Concatenating the two towers their shape must agree).<br/>
- In addition this layer makes the model indifferent image size.<br/>
-The Training is done over TT100K dataset and  testing is done over  the Belgium database. On the way to try to create a generic model. <br/>
+We boost the performance of the network by using a SPP layer (Spatial Pyramid Pooling) instead of a costum pooling layer in the end of each tower (to concatenate the two towers, their shape must agree).<br/>
+In addition this layer makes the model independent from the image size.<br/>
+The Training is done over TT100K dataset and testing is done over the Belgium database. On the way to try to create a generic model. <br/>
 <p align="center">
-<img src="https://github.com/BourbonCreams/mcv-m5/blob/master/imgs/CNN_Boost_LamLam.png" />
+<img src="https://github.com/BourbonCreams/mcv-m5/blob/master/imgs/CNN_Boost_LamLam.png" height=500"/>
 </p>
 
 
