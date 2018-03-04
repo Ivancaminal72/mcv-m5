@@ -104,4 +104,3 @@ CUDA_VISIBLE_DEVICES=0 python train.py -c config/dataset.py -e expName
 <a href="https://drive.google.com/open?id=1xdwzScs1yIeNa9y7kvcai-PCpIQG_0BUL5POIirqQiM">Slides Week 2 </a>
 
 # Link to a Google Drive with the weights of the model 
-
