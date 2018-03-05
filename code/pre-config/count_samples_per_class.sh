@@ -27,14 +27,14 @@ do
 done;
 }
 
-path=/data/module5/Datasets/classification/TT100K_trafficSigns/train
+path=/data/module5/Datasets/classification/KITTI/train
 cd $path
-recorrer_directorio "TT100K_trafficSigns_train"
+recorrer_directorio "KITTI_train"
 
-path=/data/module5/Datasets/classification/TT100K_trafficSigns/test
+path=/data/module5/Datasets/classification/KITTI/test
 cd $path
-recorrer_directorio "TT100K_trafficSigns_test"
+recorrer_directorio "KITTI_test"
 
-path=/data/module5/Datasets/classification/TT100K_trafficSigns/valid
+path=/data/module5/Datasets/classification/KITTI/valid
 cd $path
-recorrer_directorio "TT100K_trafficSigns_valid"
+recorrer_directorio "KITTI_valid"

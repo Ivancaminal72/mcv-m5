@@ -5,15 +5,15 @@ dataset_name2                = None            # Second dataset name. None if no
 perc_mb2                     = None            # Percentage of data from the second dataset in each minibatch
 
 # Model
-model_name                   = 'vgg16'          # Model to use ['fcn8' | 'lenet' | 'alexNet' | 'vgg16' |  'vgg19' | 'resnet50' | 'InceptionV3']
+model_name                   = 'lamlam'    # Model to use ['fcn8' | 'lenet' | 'alexNet' | 'vgg16' |  'vgg19' | 'resnet50' | 'InceptionV3']
 freeze_layers_from           = None            # Freeze layers from 0 to this layer during training (Useful for finetunning) [None | 'base_model' | Layer_id]
-show_model                   = False           # Show the architecture layers
+show_model                   = True            # Show the architecture layers
 load_imageNet                = False           # Load Imagenet weights and normalize following imagenet procedure
 load_pretrained              = False           # Load a pretrained model for doing finetuning
 weights_file                 = 'weights.hdf5'  # Training weight file name
 
 # Parameters
-train_model                  = False           # Train the model
+train_model                  = True           # Train the model
 test_model                   = True            # Test the model
 pred_model                   = False           # Predict using the model
 
@@ -22,7 +22,7 @@ debug                        = False           # Use only few images for debugin
 debug_images_train           = 50              # N images for training in debug mode (-1 means all)
 debug_images_valid           = 50              # N images for validation in debug mode (-1 means all)
 debug_images_test            = 50              # N images for testing in debug mode (-1 means all)
-debug_n_epochs               = 2               # N of training epochs in debug mode
+debug_n_epochs               = 6               # N of training epochs in debug mode
 
 # Batch sizes
 batch_size_train             = 8               # Batch size during training
@@ -31,10 +31,10 @@ batch_size_test              = 30              # Batch size during testing
 crop_size_train              = None            # Crop size during training (Height, Width) or None
 crop_size_valid              = None            # Crop size during validation
 crop_size_test               = None            # Crop size during testing
-resize_train                 = (224, 224)      # Resize the image during training (Height, Width) or None
-resize_valid                 = (224, 224)      # Resize the image during validation
-resize_test                  = (224, 224)      # Resize the image during testing
-interpolation_order          = 1               # 0-5 Nearest-neighbor, Bi-linear, Bi-quadratic, Bi-cubic, Bi-quartic, Bi-quintic
+resize_train                 = None            # Resize the image during training (Height, Width) or None
+resize_valid                 = None            # Resize the image during validation
+resize_test                  = None            # Resize the image during testing
+interpolation_order          = 0               # 0-5 Nearest-neighbor, Bi-linear, Bi-quadratic, Bi-cubic, Bi-quartic, Bi-quintic
 
 # Data shuffle
 shuffle_train                = True            # Whether to shuffle the training data
@@ -60,7 +60,7 @@ save_results_n_legend_rows   = 1               # Number of rows when showwing th
 earlyStopping_enabled        = True            # Enable the Callback
 earlyStopping_monitor        = 'val_acc'       # Metric to monitor
 earlyStopping_mode           = 'max'           # Mode ['max' | 'min']
-earlyStopping_patience       = 2             # Max patience for the early stopping
+earlyStopping_patience       = 6               # Max patience for the early stopping
 earlyStopping_verbose        = 0               # Verbosity of the early stopping
 
 # Callback model check point
@@ -100,7 +100,7 @@ TensorBoard_logs_folder      = None             #
 norm_imageNet_preprocess           = False     # Normalize following imagenet procedure
 norm_fit_dataset                   = True      # If True it recompute std and mean from images. Either it uses the std and mean set at the dataset config file
 norm_rescale                       = 1/255.    # Scalar to divide and set range 0-1
-norm_featurewise_center            = False     # Substract mean - dataset
+norm_featurewise_center            = True     # Substract mean - dataset
 norm_featurewise_std_normalization = False     # Divide std - dataset
 norm_samplewise_center             = False     # Substract mean - sample
 norm_samplewise_std_normalization  = False     # Divide std - sample

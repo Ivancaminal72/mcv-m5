@@ -72,7 +72,6 @@ def build_lamlam(img_shape=(3, 224, 224), n_classes=1000, n_layers=16, l2_reg=0.
     # tower_1 : texture - small filter
 
     tower_1 = Conv2D(output1_conv,(filt_size1_1,filt_size1_2),strides = (stride1_1,stride1_2),padding='same',activation = activ1,trainable=train_layer_flag,name='tower1_conv2')(input_shape)
-
     tower_1 = BatchNormalization()(tower_1)
     tower_1 = MaxPooling2D((pool_size1_1,pool_size1_2),trainable=train_layer_flag, name='tower1_pool')(tower_1)
     # tower_2 : behavair- organization - bigger filter
