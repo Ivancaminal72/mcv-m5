@@ -47,11 +47,7 @@ class One_Net_Model(Model):
                                             verbose=1,
                                             callbacks=cb,
                                             validation_data=valid_gen,
-<<<<<<< HEAD
-					                        validation_steps = self.cf.dataset.n_images_valid//self.cf.batch_size_valid,
-=======
                                             validation_steps = self.cf.dataset.n_images_valid//self.cf.batch_size_valid,
->>>>>>> a9abc180a57f88c5dc72a682e6bedf9f1eacffd3
                                             class_weight=None,
                                             max_q_size=10,
                                             nb_worker=1,
@@ -110,19 +106,6 @@ class One_Net_Model(Model):
     def test(self, test_gen):
         if self.cf.test_model:
             print('\n > Testing the model...')
-<<<<<<< HEAD
-            # Load best trained mode
-	    print(self.cf.weights_test_file)
-            self.model.load_weights(self.cf.weights_test_file)
-	    print type(test_gen)
-            # Evaluate model
-            start_time_global = time.time()
-            test_metrics = self.model.evaluate_generator(test_gen,
-                                                         self.cf.dataset.n_images_test,
-                                                         max_q_size=10,
-                                                         nb_worker=1,
-                                                         pickle_safe=False)
-=======
 
             # Load best trained model
             print('\n > Loading model from '+self.cf.weights_test_file)
@@ -146,7 +129,6 @@ class One_Net_Model(Model):
                 for k in metrics_dict.keys():
                     print ('      {}: {}'.format(k, metrics_dict[k]))
 
->>>>>>> a9abc180a57f88c5dc72a682e6bedf9f1eacffd3
             if self.cf.problem_type == 'detection':
                 # Dataset and the model used
                 dataset_name = self.cf.dataset_name 
@@ -258,4 +240,4 @@ class One_Net_Model(Model):
                                                                      jacc_percl[i]*100))
                 # Compute jaccard mean
                 jacc_mean = np.nanmean(jacc_percl)
-                print ('   Jaccard mean: {}'.format(jacc_mean))
+print ('   Jaccard mean: {}'.format(jacc_mean))
