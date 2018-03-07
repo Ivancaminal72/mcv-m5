@@ -18,7 +18,7 @@ test_model                   = True            # Test the model
 pred_model                   = False           # Predict using the model
 
 # Debug
-debug                        = False           # Use only few images for debuging
+debug                        = False 	       # Use only few images for debuging
 debug_images_train           = 160             # N images for training in debug mode (-1 means all)
 debug_images_valid           = 160             # N images for validation in debug mode (-1 means all)
 debug_images_test            = 160             # N images for testing in debug mode (-1 means all)
@@ -31,9 +31,10 @@ batch_size_test              = 32            # Batch size during testing
 crop_size_train              = None            # Crop size during training (Height, Width) or None
 crop_size_valid              = None            # Crop size during validation
 crop_size_test               = None            # Crop size during testing
-resize_train                 = (320, 320)      # Resize the image during training (Height, Width) or None
-resize_valid                 = (320, 320)      # Resize the image during validation
-resize_test                  = (320, 320)      # Resize the image during testing
+resize_train                 = (416, 416)      # Resize the image during training (Height, Width) or None
+resize_valid                 = (416, 416)      # Resize the image during validation
+resize_test                  = (416, 416)      # Resize the image during testing
+interpolation_order          = 1               # 0-5 Nearest-neighbor, Bi-linear, Bi-quadratic, Bi-cubi$
 
 # Data shuffle
 shuffle_train                = True            # Whether to shuffle the training data

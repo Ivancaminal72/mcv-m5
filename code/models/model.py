@@ -119,7 +119,6 @@ class One_Net_Model(Model):
                                                              steps=self.cf.dataset.n_images_test//self.cf.batch_size_test,
                                                              max_queue_size=10,
                                                              workers=1)
-    
                 total_time_global = time.time() - start_time_global
                 fps = float(self.cf.dataset.n_images_test) / total_time_global
                 s_p_f = total_time_global / float(self.cf.dataset.n_images_test)
@@ -131,14 +130,13 @@ class One_Net_Model(Model):
 
             if self.cf.problem_type == 'detection':
                 # Dataset and the model used
-                dataset_name = self.cf.dataset_name 
-                #model_name = self.cf.model_name 
+                dataset_name = self.cf.dataset_name
+                #model_name = self.cf.model_name
                 # Net output post-processing needs two parameters:
                 detection_threshold = 0.3 # Min probablity for a prediction to be considered
                 nms_threshold       = 0.2 # Non Maximum Suppression threshold
                 # IMPORTANT: the values of these two params will affect the final performance of the netwrok
                 #            you are allowed to find their optimal values in the validation/train sets
-                
                 if dataset_name == 'TT100K_detection':
                     classes = ['i2','i4','i5','il100','il60','il80','io','ip','p10','p11','p12','p19','p23','p26','p27','p3','p5','p6','pg','ph4','ph4.5','ph5','pl100','pl120','pl20','pl30','pl40','pl5','pl50','pl60','pl70','pl80','pm20','pm30','pm55','pn','pne','po','pr40','w13','w32','w55','w57','w59','wo']
                 elif dataset_name == 'Udacity':
@@ -240,4 +238,4 @@ class One_Net_Model(Model):
                                                                      jacc_percl[i]*100))
                 # Compute jaccard mean
                 jacc_mean = np.nanmean(jacc_percl)
-print ('   Jaccard mean: {}'.format(jacc_mean))
+		print ('   Jaccard mean: {}'.format(jacc_mean))

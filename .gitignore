@@ -3,3 +3,5 @@
 **/*.png
 code/datatmp/*
 **/*.save
+**/*.hdf5
+**/*.swp
