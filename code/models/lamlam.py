@@ -86,7 +86,7 @@ def build_lamlam(img_shape=(3, 224, 224), n_classes=1000, n_layers=16, l2_reg=0.
     out = Dense(output_fc,activation=activ_fc,name='fc')(merged)
     out = BatchNormalization()(out)
     out = Dropout(0.5)(out)
-    out = Dense(n_classes,activation='softmax',name='predictions')(out)
+    out = Dense(n_classes,activation='softmax',name='prediction_{}'.format(n_classes))(out)
 	# Build a new model ( input the sane, output in the x layer)
     model = Model(input=input_shape, output=out)
     #if freeze_layers_from is not None:
