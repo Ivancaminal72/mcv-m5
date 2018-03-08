@@ -31,9 +31,9 @@ batch_size_test              = 32            # Batch size during testing
 crop_size_train              = None            # Crop size during training (Height, Width) or None
 crop_size_valid              = None            # Crop size during validation
 crop_size_test               = None            # Crop size during testing
-resize_train                 = (416, 416)      # Resize the image during training (Height, Width) or None
-resize_valid                 = (416, 416)      # Resize the image during validation
-resize_test                  = (416, 416)      # Resize the image during testing
+resize_train                 = None      # Resize the image during training (Height, Width) or None
+resize_valid                 = None      # Resize the image during validation
+resize_test                  = None      # Resize the image during testing
 interpolation_order          = 1               # 0-5 Nearest-neighbor, Bi-linear, Bi-quadratic, Bi-cubi$
 
 # Data shuffle
