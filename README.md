@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # === WEEK 1 ===
 
 ## M5 Project: Scene Understanding for Autonomous Vehicles
@@ -110,77 +109,24 @@ CUDA_VISIBLE_DEVICES=0 python train.py -c config/dataset.py -e expName
 
 # Link to a Google Drive with the weights of the model 
 <a href="https://drive.google.com/open?id=1prZl1Nyk6i8_jCgN52oghrHRBnsVwyZg"> Weights </a>
-=======
-# mcv-m5
-Master in Computer Vision - M5 Visual recognition
 
-## Fork this project
-Fork this project to start your group project. Add [robertbenavente](https://github.com/robertbenavente) and [lluisgomez](https://github.com/lluisgomez/) as contributors.
 
-## Project description
-Download the [Overleaf document](https://www.overleaf.com/read/qrjbtzwtjhmx)
+# === WEEK 3/4 ===
 
-## Project slides
-- Google slides for [Week 1](https://docs.google.com/presentation/d/1A6hgbNn8N-Iq8MhSa_RPIyf87DBL6PCtoDzy1zqS5Xs/edit?usp=sharing)
-- Google slides for [Week 2](https://docs.google.com/presentation/d/1Q69lmzPzgtc4lDw8dr9yyFY_T9JXhjJgL4ShyxFJk3M/edit?usp=sharing)
-- Google slides for [Week 3](https://docs.google.com/presentation/d/1WuzVeTwUL65Dnki3vsBJgHXwKffrFanwXbmR_URkLQQ/edit?usp=sharing)
-- Google slides for Week 4 (T.B.A.) 
-- Google slides for Week 5 (T.B.A.)
-- Google slides for Week 6 (T.B.A.)
-- Google slides for Week 7 (T.B.A.)
+## Task A: Run the code
 
-## Peer review
-- Intra-group evaluation form for Week 2 (T.B.A.)
-- Intra-group evaluation form for Weeks 3/4 (T.B.A.)
-- Intra-group evaluation form for Weeks 5/6 (T.B.A.)
-- Intra-group evaluation form for Week 7 (T.B.A.)
+## Task B: Read two papers (YOLO + SSD)
 
-## News
- - Improve your GitHub account following [this document](https://docs.google.com/document/d/14oxSKWBbMajIB5Bn2CM-DNb-vychY1f393qYfsHNJfY/edit?usp=sharing)
+#### Summaries: <a href="https://drive.google.com/open?id=19cE_PZwFXtR3TOgjvCwaT6wBOkmjBTpYECzoFD_bNeA">YOLO</a>, <a href="https://drive.google.com/open?id=1EUirquk_4uj3BQyfaq3AbGwjbZaH-LbeIcjtPwktpX8">SSD</a>.
 
-## Groups
+## Task C: Implement a new network (SSD)
 
- - [Group 01](https://github.com/guillemdelgado/mcv-m5)
-     - Francisco Roldán Sánchez
-     - Guillem Delgado Gonzalo
-     - Jordi Gené Mola 
+Implementation found in this <a href="https://github.com/rykov8/ssd_keras">Github repo</a>.
 
- - [Group 02](https://github.com/rogermm14/mcv-m5)
-     - Roger Marí Molas
-     - Joan Sintes Marcos
-     - Alex Palomo Dominguez
-     - Alex Vicente Sola
 
- - [Group 04](https://github.com/mcvavteam/mcv-m5)
-     - Mikel Menta Garde
-     - Alex Valles Fernandez
-     - Sebastian Camilo Maya Hernández
-     - Pedro Luis Trigueros Mondéjar
+## Task D: Evaluate the network with another dataset (Udacity)
 
- - [Group 05](https://github.com/marc-gorriz/mcv-m5)
-     - Guillermo Eduardo Torres
-     - Marc Górriz Blanch
-     - Cristina Maldonado Moncada
 
- - [Group 06](https://github.com/yixiao1/mcv-m5)
-     - Juan Felipe Montesinos Garcia
-     - Ferran Carrasquer Mas
-     - Yi Xiao
 
- - [Group 07](https://github.com/ArnauVallve94/mcv-m5)
-     - Yevgeniy Kadranov
-     - Santiago Barbarisi
-     - Arnau Vallvé Gispert
+## Task E: Boost the performance of the network
 
- - [Group 08](https://github.com/jonpoveda/scene-understanding-for-autonomous-vehicles)
-     - Ferran Pérez Gamonal
-     - Joan Francesc Serracant Lorenzo
-     - Jonatan Poveda Pena
-     - Martí Cobos Arnalot
- 
- - [Group 09](https://github.com/BourbonCreams/mcv-m5)
-     - Lorenzo Betto
-     - Noa Mor
-     - Ana Caballero Cano
-     - Ivan Caminal Colell
->>>>>>> a9abc180a57f88c5dc72a682e6bedf9f1eacffd3
