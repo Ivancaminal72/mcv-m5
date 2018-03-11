@@ -114,13 +114,19 @@ CUDA_VISIBLE_DEVICES=0 python train.py -c config/dataset.py -e expName
 # === WEEK 3/4 ===
 
 ## Task A: Run the code
+We fixed some errors to be able to run the code. We got <a href="https://drive.google.com/open?id=1V9YR25Qb4yf7Gs2LdtebVMVDHxpPV9RT3-6cwqTHtAA">this results </a>  </br>
+
+The dataset was also analyzed: </br>
+The number of signs in the annotation files do not always includes all the traffic sign exist in the image.  </br>
+They differ in the number of traffic signs, the orientation and illumination. </br>
 
 ## Task B: Read two papers (YOLO + SSD)
+Summaries:
+<a href="https://drive.google.com/open?id=1Af6ICi9XkcP4RK567LYebVJcOn5t4dDbt4DXdzS0ey0">YOLO: You only Look Once </a>  </br>
+<a href="https://drive.google.com/open?id=1EUirquk_4uj3BQyfaq3AbGwjbZaH-LbeIcjtPwktpX8">SSD: Single Shot MultiBox Detector </a>  </br>
 
-#### Summaries: <a href="https://drive.google.com/open?id=19cE_PZwFXtR3TOgjvCwaT6wBOkmjBTpYECzoFD_bNeA">YOLO</a>, <a href="https://drive.google.com/open?id=1EUirquk_4uj3BQyfaq3AbGwjbZaH-LbeIcjtPwktpX8">SSD</a>.
 
 ## Task C: Implement a new network (SSD)
-
 Implementation found in this <a href="https://github.com/rykov8/ssd_keras">Github repo</a>.
 
 
