@@ -114,16 +114,41 @@ CUDA_VISIBLE_DEVICES=0 python train.py -c config/dataset.py -e expName
 # === WEEK 3/4 ===
 
 ## Task A: Run the code
-We fixed some errors to be able to run the code. We got <a href="https://drive.google.com/open?id=1V9YR25Qb4yf7Gs2LdtebVMVDHxpPV9RT3-6cwqTHtAA">this results </a>  </br>
+### Short abstract about what you implemented (5 lines max)
+Task A: We fixed some errors to be able to run the code. <br/>
+Task B: We red  two articled and did a summary. <br/>
+Task C: (Pending)<br/>
+Task D: (Pending)<br/>
+Task E: (Pending)<br/>
 
-The dataset was also analyzed: </br>
-The number of signs in the annotation files do not always includes all the traffic sign exist in the image.  </br>
-They differ in the number of traffic signs, the orientation and illumination. </br>
+###  Short explanation of the code in the repository
+Task A: YOLO object detector <br/>
+We fixed some errors to be able to run the code. We got <a href="https://drive.google.com/open?id=1V9YR25Qb4yf7Gs2LdtebVMVDHxpPV9RT3-6cwqTHtAA">this results </a>  <br/>
+
+The dataset was also analyzed: <br/>
+The number of signs in the annotation files do not always includes all the traffic sign exist in the image.  <br/>
+They differ in the number of traffic signs, the orientation and illumination. <br/>
+
+Task B: - <br/>
+Task C: SSD object detector, Keras implementation<br/> 
+Task D: (Pending)<br/>
+Task E: (Pending)<br/>
+
+### Results of the different experiments
+<a href="https://drive.google.com/open?id=1V9YR25Qb4yf7Gs2LdtebVMVDHxpPV9RT3-6cwqTHtAA">Results </a>  <br/>
+
+### Instructions for using the code
+
+### Indicate the level of completeness of the goals of this week
+50%
+
+### Link to a Google Drive with the weights of the trained models
+(Pending) <br/>
 
 ## Task B: Read two papers (YOLO + SSD)
-Summaries:  </br>
-<a href="https://drive.google.com/open?id=1Af6ICi9XkcP4RK567LYebVJcOn5t4dDbt4DXdzS0ey0">YOLO: You only Look Once </a>  </br>
-<a href="https://drive.google.com/open?id=1EUirquk_4uj3BQyfaq3AbGwjbZaH-LbeIcjtPwktpX8">SSD: Single Shot MultiBox Detector </a>  </br>
+Summaries:  <br/>
+<a href="https://drive.google.com/open?id=1Af6ICi9XkcP4RK567LYebVJcOn5t4dDbt4DXdzS0ey0">YOLO: You only Look Once </a>  <br/>
+<a href="https://drive.google.com/open?id=1EUirquk_4uj3BQyfaq3AbGwjbZaH-LbeIcjtPwktpX8">SSD: Single Shot MultiBox Detector </a> <br/>
 
 
 ## Task C: Implement a new network (SSD)
@@ -131,8 +156,7 @@ Implementation found in this <a href="https://github.com/rykov8/ssd_keras">Githu
 
 
 ## Task D: Evaluate the network with another dataset (Udacity)
-
-
+(Pending) <br/>
 
 ## Task E: Boost the performance of the network
-
+(Pending) <br/>
