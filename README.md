@@ -121,7 +121,7 @@ The number of signs in the annotation files do not always includes all the traff
 They differ in the number of traffic signs, the orientation and illumination. </br>
 
 ## Task B: Read two papers (YOLO + SSD)
-Summaries:
+Summaries:  </br>
 <a href="https://drive.google.com/open?id=1Af6ICi9XkcP4RK567LYebVJcOn5t4dDbt4DXdzS0ey0">YOLO: You only Look Once </a>  </br>
 <a href="https://drive.google.com/open?id=1EUirquk_4uj3BQyfaq3AbGwjbZaH-LbeIcjtPwktpX8">SSD: Single Shot MultiBox Detector </a>  </br>
 
