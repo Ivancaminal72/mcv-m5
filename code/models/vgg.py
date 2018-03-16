@@ -1,9 +1,7 @@
 # Keras imports
 from keras.models import Model, Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten
-from keras.layers.convolutional import (Convolution2D, MaxPooling2D,
-                                        ZeroPadding2D)
-
+from keras.layers.convolutional import (Convolution2D, MaxPooling2D,ZeroPadding2D)
 from keras.applications.vgg16 import VGG16
 from keras.applications.vgg19 import VGG19
 

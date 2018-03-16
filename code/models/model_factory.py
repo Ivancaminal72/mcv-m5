@@ -1,7 +1,7 @@
 import os
 
 # Keras imports
-from metrics.metrics import cce_flatt, IoU, YOLOLoss, YOLOMetrics
+from metrics.metrics import cce_flatt, IoU, YOLOLoss, YOLOMetrics, MultiboxLoss, BBoxUtility
 from keras import backend as K
 from keras.utils.vis_utils import plot_model
 
@@ -11,6 +11,7 @@ from keras.utils.vis_utils import plot_model
 from models.vgg import build_vgg
 from models.lamlam import build_lamlam
 from models.lamlam_spp import build_lamlam_spp
+from models.ssd import build_ssd
 #from models.resnet import build_resnet50
 #from models.inceptionV3 import build_inceptionV3
 
@@ -49,9 +50,15 @@ class Model_Factory():
             in_shape = (cf.dataset.n_channels,
                         cf.target_size_train[0],
                         cf.target_size_train[1])
+
             # TODO detection : check model, different detection nets may have different losses and metrics
-            loss = YOLOLoss(in_shape, cf.dataset.n_classes, cf.dataset.priors)
-            metrics = [YOLOMetrics(in_shape, cf.dataset.n_classes, cf.dataset.priors,name='avg_recall'),YOLOMetrics(in_shape, cf.dataset.n_classes, cf.dataset.priors,name='avg_iou')]
+            if cf.model_name == 'yolo':
+                loss = YOLOLoss(in_shape, cf.dataset.n_classes, cf.dataset.priors)
+                metrics = [YOLOMetrics(in_shape, cf.dataset.n_classes, cf.dataset.priors,name='avg_recall'),YOLOMetrics(in_shape, cf.dataset.n_classes, cf.dataset.priors,name='avg_iou')]
+            elif cf.model_name == 'ssd':
+                loss = MultiboxLoss(cf.dataset.n_classes).compute_loss
+                metrics = [BBoxUtility(cf.dataset.n_classes, cf.dataset.priors).iou]
+
         elif cf.dataset.class_mode == 'segmentation':
             if K.image_dim_ordering() == 'th':
                 if variable_input_size:
@@ -78,7 +85,7 @@ class Model_Factory():
         if cf.model_name in ['lenet', 'alexNet', 'vgg16', 'vgg19', 'resnet50',
                              'InceptionV3', 'fcn8', 'unet', 'segnet',
                              'segnet_basic', 'resnetFCN', 'yolo', 'tiny-yolo',
-			     'lamlam', 'lamlam_spp']:
+			     'lamlam', 'lamlam_spp', 'ssd']:
             if optimizer is None:
                 raise ValueError('optimizer can not be None')
 
@@ -162,6 +169,9 @@ class Model_Factory():
                                cf.dataset.n_priors,
                                load_pretrained=cf.load_imageNet,
                                freeze_layers_from=cf.freeze_layers_from, tiny=False)
+        elif cf.model_name == 'ssd':
+            model = build_ssd(in_shape, cf.dataset.n_classes,
+                               freeze_layers_from=cf.freeze_layers_from)
         elif cf.model_name == 'tiny-yolo':
             model = build_yolo(in_shape, cf.dataset.n_classes,
                                cf.dataset.n_priors,
