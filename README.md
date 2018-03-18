@@ -117,9 +117,9 @@ CUDA_VISIBLE_DEVICES=0 python train.py -c config/dataset.py -e expName
 ### Short abstract about what you implemented (5 lines max)
 Task A: We fixed some errors to be able to run the code. <br/>
 Task B: We red  two articled and did a summary. <br/>
-Task C: (Pending)<br/>
-Task D: (Pending)<br/>
-Task E: (Pending)<br/>
+Task C: SSD object detector, using Keras <br/>
+Task D: Evaluation of udacity dataset <br/>
+Task E: Boost the performance throught data augmentation <br/>
 
 ###  Short explanation of the code in the repository
 Task A: YOLO object detector <br/>
@@ -131,14 +131,15 @@ They differ in the number of traffic signs, the orientation and illumination. <b
 
 Task B: - <br/>
 Task C: SSD object detector, Keras implementation<br/> 
-Task D: (Pending)<br/>
-Task E: (Pending)<br/>
+Task D: Run Udacity dataset for epochs to 40 and tune the colors (saturation) to solve the challenges of the dataset. <br/>
+Task E: Data augmentation <br/>
+
 
 ### Results of the different experiments
 <a href="https://drive.google.com/open?id=1V9YR25Qb4yf7Gs2LdtebVMVDHxpPV9RT3-6cwqTHtAA">Results </a>  <br/>
 
 ### Instructions for using the code
-
+CUDA_VISIBLE_DEVICES=0 python train.py -c config/dataset.py -e expName
 
 ## Task B: Read two papers (YOLO + SSD)
 Summaries:  <br/>
@@ -151,12 +152,20 @@ Implementation found in this <a href="https://github.com/rykov8/ssd_keras">Githu
 
 
 ## Task D: Evaluate the network with another dataset (Udacity)
-(Pending) <br/>
+Set-up new experiments files to detect among cars, pedestrians, and trucks on the Udacity dataset, Train and evaluate <br/>
+Increment the number of epochs to 40.
+We ran the yolo with plain udacity (for comparison with TT100K) <br/><br/>
 
+Analyze the challenges of the dataset as it is. <br/>
+There is a large variance in the luminance in the photos, has a lot of un balance and disorders in the luminance (for example : reflective light from the windshield).
+ <br/>
+Propose (and implement) solutions. <br/>
+A solution can be to pre process the images - tunning the colors (saturation). <br/>
+Or training using data augmentation on the color channel - creating more variance in the color spectrum. <br/>
 
 
 ## Task E: Boost the performance of the network
-(Pending) <br/>
+We boosted the performance of the network by implementing the previous solution (pro process images changing color saturation) and applying data augmentation. <br/>
 
 
 ### Indicate the level of completeness of the goals of this week
