@@ -139,11 +139,6 @@ Task E: (Pending)<br/>
 
 ### Instructions for using the code
 
-### Indicate the level of completeness of the goals of this week
-50%
-
-### Link to a Google Drive with the weights of the trained models
-(Pending) <br/>
 
 ## Task B: Read two papers (YOLO + SSD)
 Summaries:  <br/>
@@ -158,5 +153,17 @@ Implementation found in this <a href="https://github.com/rykov8/ssd_keras">Githu
 ## Task D: Evaluate the network with another dataset (Udacity)
 (Pending) <br/>
 
+
+
 ## Task E: Boost the performance of the network
+(Pending) <br/>
+
+
+### Indicate the level of completeness of the goals of this week
+100%
+
+### Results of the different experiments
+<a href="https://www.overleaf.com/read/gdvggkpbcnmd">  Slides Week 3-4 </a>  <br/>
+
+### Link to a Google Drive with the weights of the trained models
 (Pending) <br/>
