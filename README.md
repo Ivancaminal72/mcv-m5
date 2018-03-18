@@ -22,7 +22,7 @@ Ana Caballero Cano: ana.caballero.cano@gmail.com
 Ivan Caminal Colell: ivancaminal72@gmail.com
 
 ## Overleaf article
-Link to the Overleaf [article](https://www.overleaf.com/read/rwdjpbdgsbdk), i.e. the report of the project.
+Link to the Overleaf [article](https://www.overleaf.com/read/gdvggkpbcnmd), i.e. the report of the project.
 
 
 #### Summaries of the two papers: <a href="https://drive.google.com/open?id=1M0HRZNI0OJJiaiefAOT1j8ABFqY55E2JLAgv--reY1E">VGG</a>, <a href="https://drive.google.com/open?id=1eKTcFKF5oGYx-GdWhsLea28V4AF49iJHj9ZHYdvrcas">SqueezeNet</a>.
@@ -172,7 +172,10 @@ We boosted the performance of the network by implementing the previous solution 
 100%
 
 ### Results of the different experiments
-<a href="https://www.overleaf.com/read/gdvggkpbcnmd">  Slides Week 3-4 </a>  <br/>
+<a href="https://drive.google.com/open?id=1V9YR25Qb4yf7Gs2LdtebVMVDHxpPV9RT3-6cwqTHtAA" >  Results week 3-4 </a>  <br/>
+
+### Link to the Google Slide presentation
+<a href="https://drive.google.com/open?id=1p503aEcRpB6ZSb9s1007hZfpbRiKqZ46kqxdHkaczzE">  Slides Week 3-4 </a>  <br/>
 
 ### Link to a Google Drive with the weights of the trained models
-(Pending) <br/>
+<a href="https://drive.google.com/open?id=1cU9eV9GEl9Gmcz_LMSCrtbELU0tlOxcv">  Weights </a>  <br/>
