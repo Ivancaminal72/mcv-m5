@@ -41,9 +41,17 @@ def process(cf):
         model.train(train_gen, valid_gen, cb)
 
     if cf.test_model:
+        # Compute testing metrics
+        if (train_gen != None):
+            print('metrics for training')
+            model.test(train_gen)
+
         # Compute validation metrics
-        if (valid_gen != None): model.test(valid_gen)
+        if (valid_gen != None):
+	    print('metrics for validation')
+ 	    model.test(valid_gen)
         # Compute test metrics
+	print('metrics for testing')
         model.test(test_gen)
 
     if cf.pred_model:

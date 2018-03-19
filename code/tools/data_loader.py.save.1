@@ -13,7 +13,6 @@ from six.moves import range
 import os
 import SimpleITK as sitk
 import threading
-import cv2
 
 from keras import backend as K
 
@@ -101,11 +100,8 @@ def img_to_array(img, dim_ordering='default'):
 def random_channel_shift(x, intensity, channel_axis=0):
     x = np.rollaxis(x, channel_axis, 0)
     min_x, max_x = np.min(x), np.max(x)
-
-    # for each channel seprate distribution
-    numberOfChannels = np.shape(x)[0]
-    channel_images = [np.clip(x[i] + np.random.uniform(-intensity[i], intensity[i]), np.min(x[i]), np.max(x[i]))
-                      for i in range(numberOfChannels)]
+    channel_images = [np.clip(x_channel + np.random.uniform(-intensity, intensity), min_x, max_x)
+                      for x_channel in x]
     x = np.stack(channel_images, axis=0)
     x = np.rollaxis(x, 0, channel_axis + 1)
     return x
@@ -354,23 +350,23 @@ class ImageDataGenerator(object):
                  class_mode='categorical',
                  rgb_mean=None,
                  rgb_std=None,
-                 crop_size=None
-                 bbox_util = None):
+                 crop_size=None):
         if dim_ordering == 'default':
             dim_ordering = K.image_dim_ordering()
         self.__dict__.update(locals())
         self.principal_components = None
         # self.rescale = rescale
         self.preprocessing_function = preprocessing_function
-        self.bbox_util = bbox_util
-	if preprocessing_function is not None:
-	    print(preprocessing_function)
         self.cb_weights = None
+	print(preprocessing_function)
         if dim_ordering not in {'tf', 'th'}:
             raise Exception('dim_ordering should be "tf" (channel after row '
                             'and column) or "th" (channel before row and '
                             'column). Received arg: ', dim_ordering)
-        self.dim_ordering = dim_ordering
+        if preprocessing_function is not None:
+	    if preprocessing_function is 'rgb2hsv':
+		hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+	self.dim_ordering = dim_ordering
         if dim_ordering == 'th':
             self.channel_index = 1
             self.row_index = 2
@@ -386,7 +382,6 @@ class ImageDataGenerator(object):
             broadcast_shape[self.channel_index - 1] = len(rgb_mean)
             self.mean = np.reshape(rgb_mean, broadcast_shape)
             print ('   Mean {}: {}'.format(self.mean.shape, self.rgb_mean))
-
         # Broadcast the shape of std
         if rgb_std is not None and featurewise_std_normalization:
             broadcast_shape = [1, 1, 1]
@@ -436,7 +431,7 @@ class ImageDataGenerator(object):
             classes=classes, class_mode=class_mode,
             dim_ordering=self.dim_ordering,
             batch_size=batch_size, shuffle=shuffle, seed=seed,
-            gt_directory=gt_directory, bbox_util=self.bbox_util,
+            gt_directory=gt_directory,
             save_to_dir=save_to_dir, save_prefix=save_prefix,
             save_format=save_format,
 	    order = order)
@@ -641,7 +636,7 @@ class ImageDataGenerator(object):
                         x1,y1,x2,y2 = b.astype(int)[ii]
                         # get the four edge points of the bounding box
                         v1 = np.array([y1,x1,1])
-                        v2 = np.array([y2,x2,1])
+                        v2 = np.array([y2,x2,1]) 
                         v3 = np.array([y2,x1,1])
                         v4 = np.array([y1,x2,1])
                         # transform the 4 points
@@ -650,18 +645,14 @@ class ImageDataGenerator(object):
                         v3 = np.dot(p_transform_matrix, v3)
                         v4 = np.dot(p_transform_matrix, v4)
                         # compute the new bounding box edges
-                        b[ii,0] = np.min([v1[1],v2[1],v3[1],v4[1]])
+                        b[ii,0] = np.min([v1[1],v2[1],v3[1],v4[1]]) 
                         b[ii,1] = np.min([v1[0],v2[0],v3[0],v4[0]])
                         b[ii,2] = np.max([v1[1],v2[1],v3[1],v4[1]])
-                        b[ii,3] = np.max([v1[0],v2[0],v3[0],v4[0]])
+                        b[ii,3] = np.max([v1[0],v2[0],v3[0],v4[0]]) 
 
-	if not isinstance(self.channel_shift_range,(list,)):
-	    self.channel_shift_range = [self.channel_shift_range]
-	if len(self.channel_shift_range)!=3:
-	    self.channel_shift_range = self.channel_shift_range*3
-        if any(self.channel_shift_range):
-
-            x = random_channel_shift(x, np.asarray(self.channel_shift_range),img_channel_index)
+        if self.channel_shift_range != 0:
+            x = random_channel_shift(x, self.channel_shift_range,
+                                     img_channel_index)
 
         if self.horizontal_flip:
             if np.random.random() < 0.5:
@@ -1126,7 +1117,7 @@ class DirectoryIterator(Iterator):
 
     def __init__(self, directory, image_data_generator,
                  resize=None, target_size=None, color_mode='rgb',
-                 dim_ordering='default', bbox_util=None,
+                 dim_ordering='default',
                  classes=None, class_mode='categorical',
                  batch_size=32, shuffle=True, seed=None, gt_directory=None,
                  save_to_dir=None, save_prefix='', save_format='jpeg',order =1):
@@ -1142,8 +1133,7 @@ class DirectoryIterator(Iterator):
         self.save_to_dir = save_to_dir
         self.save_prefix = save_prefix
         self.save_format = save_format
-        self.order = order
-        self.bbox_util = bbox_util
+  	self.order = order
         # Check target size
         if target_size is None and batch_size > 1:
             raise ValueError('Target_size None works only with batch_size=1')
@@ -1253,11 +1243,6 @@ class DirectoryIterator(Iterator):
             img = load_img(os.path.join(self.directory, fname),
                            grayscale=self.grayscale,
                            resize=self.resize, order=1)
-
-	    if self.image_data_generator.preprocessing_function is not None:
-		if self.image_data_generator.preprocessing_function is 'rgb2hsv':
-                    img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-
             x = img_to_array(img, dim_ordering=self.dim_ordering)
 
             # Load GT image if segmentation
@@ -1340,12 +1325,9 @@ class DirectoryIterator(Iterator):
             for i, label in enumerate(self.classes[index_array]):
                 batch_y[i, label] = 1.
         elif self.class_mode == 'detection':
-            if self.model_name == 'ssd':
-                batch_y = self.bbox_util.ssd_build_gt_batch(batch_y)
-            elif  self.model_name == 'yolo' or self.model_name == 'tiny-yolo':
-                # TODO detection: check model, other networks may expect a different batch_y format and shape
-                # YOLOLoss expects a particular batch_y format and shape
-                batch_y = yolo_build_gt_batch(batch_y, self.image_shape, self.nb_class)
+            # TODO detection: check model, other networks may expect a different batch_y format and shape
+            # YOLOLoss expects a particular batch_y format and shape
+            batch_y = yolo_build_gt_batch(batch_y, self.image_shape, self.nb_class)
         elif self.class_mode == None:
             return batch_x
 

@@ -48,7 +48,7 @@ seed_test                    = 1924            # Random seed for the testing shu
 optimizer                    = 'rmsprop'       # Optimizer
 learning_rate                = 0.0001          # Training learning rate
 weight_decay                 = 0.              # Weight decay or L2 parameter norm penalty
-n_epochs                     = 30              # Number of epochs during training
+n_epochs                     = 40              # Number of epochs during training
 
 # Callback save results
 save_results_enabled         = False           # Enable the Callback
@@ -114,7 +114,7 @@ da_width_shift_range               = 0.       # Rnd horizontal shift
 da_height_shift_range              = 0.       # Rnd vertical shift
 da_shear_range                     = 0.       # Shear in radians
 da_zoom_range                      = 0.       # Zoom
-da_channel_shift_range             = 0.        # Channecf.l shifts
+da_channel_shift_range             = [0,0.2,0]        # Channecf.l shifts
 da_fill_mode                       = 'nearest'  # Fill mode
 da_cval                            = 0.         # Void image value
 da_horizontal_flip                 = False      # Rnd horizontal flip

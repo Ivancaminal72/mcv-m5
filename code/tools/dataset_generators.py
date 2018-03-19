@@ -42,7 +42,9 @@ class Dataset_Generators():
                                        warp_sigma=cf.da_warp_sigma,
                                        warp_grid_size=cf.da_warp_grid_size,
                                        dim_ordering='th' if 'yolo' in cf.model_name else 'default',
-                                       class_mode=cf.dataset.class_mode
+                                       class_mode=cf.dataset.class_mode,
+                                       preprocessing_function = cf.preprocessing_function,
+                                       bbox_util = cf.bbox_util if 'ssd' in cf.model_name else None
                                        )
 
             # Compute normalization constants if required
@@ -111,7 +113,8 @@ class Dataset_Generators():
                                        zca_whitening=cf.norm_zca_whitening,
                                        crop_size=cf.crop_size_valid,
                                        dim_ordering='th' if 'yolo' in cf.model_name else 'default',
-                                       class_mode=cf.dataset.class_mode)
+                                       class_mode=cf.dataset.class_mode,
+				       preprocessing_function = cf.preprocessing_function)
             valid_gen = dg_va.flow_from_directory(directory=cf.dataset.path_valid_img,
                                                   gt_directory=cf.dataset.path_valid_mask,
                                                   resize=cf.resize_valid,
@@ -142,7 +145,8 @@ class Dataset_Generators():
                                        zca_whitening=cf.norm_zca_whitening,
                                        crop_size=cf.crop_size_test,
                                        dim_ordering='th' if 'yolo' in cf.model_name else 'default',
-                                       class_mode=cf.dataset.class_mode)
+                                       class_mode=cf.dataset.class_mode,
+     				       preprocessing_function = cf.preprocessing_function)
 
             test_gen = dg_ts.flow_from_directory(directory=cf.dataset.path_test_img,
                                                  gt_directory=cf.dataset.path_test_mask,
@@ -158,6 +162,6 @@ class Dataset_Generators():
 
         else:
             test_gen = None
-	    
+
 
         return (train_gen, valid_gen, test_gen)

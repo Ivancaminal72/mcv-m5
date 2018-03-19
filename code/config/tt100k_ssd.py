@@ -18,7 +18,7 @@ test_model                   = True            # Test the model
 pred_model                   = False           # Predict using the model
 
 # Debug
-debug                        = True 	       # Use only few images for debuging
+debug                        = False 	       # Use only few images for debuging
 debug_images_train           = 160             # N images for training in debug mode (-1 means all)
 debug_images_valid           = 160             # N images for validation in debug mode (-1 means all)
 debug_images_test            = 160             # N images for testing in debug mode (-1 means all)
@@ -107,7 +107,7 @@ norm_samplewise_std_normalization  = False     # Divide std - sample
 norm_gcn                           = False     # Global contrast normalization
 norm_zca_whitening                 = False     # Apply ZCA whitening
 cb_weights_method                  = None      # Label weight balance [None | 'median_freq_cost' | 'rare_freq_cost']
-
+preprocessing_function 	 	   = None
 # Data augmentation for training
 da_rotation_range                  = 0          # Rnd rotation degrees 0-180
 da_width_shift_range               = 0.       # Rnd horizontal shift

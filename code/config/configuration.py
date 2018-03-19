@@ -108,6 +108,9 @@ class Configuration():
             cf.valid_metrics = ['val_loss', 'val_avg_recall', 'val_avg_iou']
             cf.best_metric = 'val_avg_recall'
             cf.best_type = 'max'
+            if cf.model_name == 'ssd':
+                cf.dataset.priors = pickle.load(open(os.path.join(self.usr_path,'extra','prior_boxes_ssd300.pkl'), 'rb'))
+                cf.bbox_util = BBoxUtility(cf.dataset.n_classes, cf.dataset.priors)
         else:
             cf.train_metrics = ['loss', 'acc']
             cf.valid_metrics = ['val_loss', 'val_acc']

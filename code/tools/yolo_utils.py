@@ -16,7 +16,7 @@ def yolo_build_gt_batch(batch_gt,image_shape,num_classes,num_priors=5):
     c = num_classes
     b = num_priors  # TODO pass num_priors
     batch_size = len(batch_gt)
-    batch_y = np.zeros([batch_size,h*w,b,c+4+1+1+2+2])
+    batch_y = np.zeros([batch_size,h*w,b,c+1+4+1+2+2])
 
     cellx = 32
     celly = 32

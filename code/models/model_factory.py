@@ -1,7 +1,8 @@
 import os
+import numpy as np
 
 # Keras imports
-from metrics.metrics import cce_flatt, IoU, YOLOLoss, YOLOMetrics, MultiboxLoss, BBoxUtility
+from metrics.metrics import cce_flatt, IoU, YOLOLoss, YOLOMetrics, MultiboxLoss, BBoxUtility, SSDMetrics
 from keras import backend as K
 from keras.utils.vis_utils import plot_model
 
@@ -57,7 +58,7 @@ class Model_Factory():
                 metrics = [YOLOMetrics(in_shape, cf.dataset.n_classes, cf.dataset.priors,name='avg_recall'),YOLOMetrics(in_shape, cf.dataset.n_classes, cf.dataset.priors,name='avg_iou')]
             elif cf.model_name == 'ssd':
                 loss = MultiboxLoss(cf.dataset.n_classes).compute_loss
-                metrics = [BBoxUtility(cf.dataset.n_classes, cf.dataset.priors).iou]
+                metrics = [SSDMetrics()]
 
         elif cf.dataset.class_mode == 'segmentation':
             if K.image_dim_ordering() == 'th':
@@ -186,7 +187,10 @@ class Model_Factory():
             model.load_weights(cf.weights_file, by_name=True)
 
         # Compile model
-        model.compile(loss=loss, metrics=metrics, optimizer=optimizer)
+        if cf.model_name == 'ssd':
+            model.compile(loss=loss, optimizer=optimizer)
+        else
+            model.compile(loss=loss, metrics=metrics, optimizer=optimizer)
 
         # Show model structure
         if cf.show_model:
