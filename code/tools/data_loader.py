@@ -354,8 +354,8 @@ class ImageDataGenerator(object):
                  class_mode='categorical',
                  rgb_mean=None,
                  rgb_std=None,
-                 crop_size=None
-                 bbox_util = None):
+                 crop_size=None,
+                 bbox_util=None):
         if dim_ordering == 'default':
             dim_ordering = K.image_dim_ordering()
         self.__dict__.update(locals())
@@ -1139,6 +1139,7 @@ class DirectoryIterator(Iterator):
         self.gt_directory = gt_directory
         self.image_data_generator = image_data_generator
         self.resize = resize
+	print(resize)
         self.save_to_dir = save_to_dir
         self.save_prefix = save_prefix
         self.save_format = save_format
@@ -1340,12 +1341,18 @@ class DirectoryIterator(Iterator):
             for i, label in enumerate(self.classes[index_array]):
                 batch_y[i, label] = 1.
         elif self.class_mode == 'detection':
-            if self.model_name == 'ssd':
-                batch_y = self.bbox_util.ssd_build_gt_batch(batch_y)
-            elif  self.model_name == 'yolo' or self.model_name == 'tiny-yolo':
+            #if self.model_name == 'ssd':
+            #    batch_y = self.bbox_util.ssd_build_gt_batch(batch_y)
+            #elif  self.model_name == 'yolo' or self.model_name == 'tiny-yolo':
                 # TODO detection: check model, other networks may expect a different batch_y format and shape
                 # YOLOLoss expects a particular batch_y format and shape
-                batch_y = yolo_build_gt_batch(batch_y, self.image_shape, self.nb_class)
+	    if self.bbox_util == None:
+		# yolo + yolo tiny
+		batch_y = yolo_build_gt_batch(batch_y, self.image_shape, self.nb_class)	
+	    else:
+		# ssd
+		batch_y = ssd_build_gt_batch(batch_y)
+                
         elif self.class_mode == None:
             return batch_x
 

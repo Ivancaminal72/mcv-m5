@@ -13,12 +13,12 @@ load_pretrained              = False           # Load a pretrained model for doi
 weights_file                 = 'weights.hdf5'  # Training weight file name
 
 # Parameters
-train_model                  = False            # Train the model
-test_model                   = True            # Test the model
+train_model                  = True            # Train the model
+test_model                   = False            # Test the model
 pred_model                   = False           # Predict using the model
 
 # Debug
-debug                        = False 	       # Use only few images for debuging
+debug                        = True 	       # Use only few images for debuging
 debug_images_train           = 100             # N images for training in debug mode (-1 means all)
 debug_images_valid           = 100             # N images for validation in debug mode (-1 means all)
 debug_images_test            = 100             # N images for testing in debug mode (-1 means all)
@@ -48,7 +48,7 @@ seed_test                    = 1924            # Random seed for the testing shu
 optimizer                    = 'rmsprop'       # Optimizer
 learning_rate                = 0.0001          # Training learning rate
 weight_decay                 = 0.              # Weight decay or L2 parameter norm penalty
-n_epochs                     = 30              # Number of epochs during training
+n_epochs                     = 40              # Number of epochs during training
 
 # Callback save results
 save_results_enabled         = False           # Enable the Callback
@@ -102,8 +102,8 @@ norm_fit_dataset                   = False     # If True it recompute std and me
 norm_rescale                       = 1/255.    # Scalar to divide and set range 0-1
 norm_featurewise_center            = False      # Substract mean - dataset
 norm_featurewise_std_normalization = False     # Divide std - dataset
-norm_samplewise_center             = True     # Substract mean - sample
-norm_samplewise_std_normalization  = True     # Divide std - sample
+norm_samplewise_center             = False     # Substract mean - sample
+norm_samplewise_std_normalization  = False    # Divide std - sample
 norm_gcn                           = False     # Global contrast normalization
 norm_zca_whitening                 = False     # Apply ZCA whitening
 cb_weights_method                  = None      # Label weight balance [None | 'median_freq_cost' | 'rare_freq_cost']
@@ -114,7 +114,7 @@ da_width_shift_range               = 0.       # Rnd horizontal shift
 da_height_shift_range              = 0.       # Rnd vertical shift
 da_shear_range                     = 0.       # Shear in radians
 da_zoom_range                      = 0.       # Zoom
-da_channel_shift_range             = 0.       # Channecf.l shifts
+da_channel_shift_range             = [0,0.2,0]        # Channecf.l shifts
 da_fill_mode                       = 'nearest'  # Fill mode
 da_cval                            = 0.         # Void image value
 da_horizontal_flip                 = False      # Rnd horizontal flip
@@ -122,4 +122,4 @@ da_vertical_flip                   = False      # Rnd vertical flip
 da_spline_warp                     = False      # Enable elastic deformation
 da_warp_sigma                      = 10         # Elastic deformation sigma
 da_warp_grid_size                  = 3          # Elastic deformation gridSize
-da_save_to_dir                     = False      # Save the images for debuging
+da_save_to_dir                     = True      # Save the images for debuging

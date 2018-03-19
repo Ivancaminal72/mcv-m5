@@ -9,12 +9,13 @@
 #CUDA_VISIBLE_DEVICES=0 python train.py -c config/Belgium_classif_ImageNet.py -e Belgium_vgg_ImageNet
 #CUDA_VISIBLE_DEVICES=0 python train.py -c config/Belgium_classif_TT100K.py -e Belgium_TT100K
 #CUDA_VISIBLE_DEVICES=0 python train.py -c config/tt100k_classif_lamlam_spp_no_resize.py -e sabato_lamlam_spp_no_resize
-CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_wb.py -e udacity_wb
-CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_wb.py -e udacity_hsv_wb
-CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_wb_sat_shift.py -e udacity_hsv_wb_s_shift
-CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_wb_sat_val_shift.py -e udacity_hsv_wb_sv_shift
-CUDA_VISIBLE_DEVICES=0 python train.py -c config/tt100k_ssd.py -e tt100k_ssd
-CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_ssd.py -e udacity_ssd
+#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_wb.py -e udacity_wb
+CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_wb.py -e udacity_hsv_wb_debug
+#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_wb_sat_shift.py -e udacity_hsv_wb_s_shift
+#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_wb_sat_val_shift.py -e udacity_hsv_wb_sv_shift
+#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_sat_shift.py -e udacity_hsv_s_shift
+#CUDA_VISIBLE_DEVICES=0 python train.py -c config/tt100k_ssd.py -e tt100k_ssd
+#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_ssd.py -e udacity_ssd
 
 #CUDA_VISIBLE_DEVICES=0 python train.py -c config/tt100k_detection_416.py -e yolo416_tt100k_full_metrics
 #CUDA_VISIBLE_DEVICES=0 python train.py -c config/KITTI_classif_ImageNet.py -e KITTI_vgg_ImageNet

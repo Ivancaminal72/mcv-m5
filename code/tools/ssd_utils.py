@@ -239,7 +239,7 @@ class BBoxUtility(object):
         batch_y = []
         for i, gt in enumerate(batch_gt):
             objects = gt.tolist()
-            boxes = np.zeros((n_boxes, 4+self.num_classes))
+            boxes = np.zeros((len(objects), 4+self.num_classes))
             for j, obj in enumerate(objects):
                 coords = obj[1:] # [xcenter, ycenter, width, height]
                 coords[0] = obj[1] - obj[3]/2 #xmin
@@ -248,9 +248,9 @@ class BBoxUtility(object):
                 coords[3] = obj[2] + obj[4]/2 #ymax
                 boxes[j,0:4] = coords
                 probs = np.zeros(self.num_classes)
-                probs[int(box[0])] = 1. #class
+                probs[int(obj[0])] = 1. #class
                 boxes[j,4:] = probs
             y = self.assign_boxes(boxes)
-            batch_y.append(y) 
+            batch_y.append(y)
 
         return np.array(batch_y)

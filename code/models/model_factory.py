@@ -2,7 +2,9 @@ import os
 import numpy as np
 
 # Keras imports
-from metrics.metrics import cce_flatt, IoU, YOLOLoss, YOLOMetrics, MultiboxLoss, BBoxUtility, SSDMetrics
+#from metrics.metrics import cce_flatt, IoU, YOLOLoss, YOLOMetrics, MultiboxLoss, BBoxUtility, SSDMetrics
+from metrics.metrics import cce_flatt, IoU, YOLOLoss, YOLOMetrics, MultiboxLoss, SSDMetrics
+from tools.ssd_utils import BBoxUtility
 from keras import backend as K
 from keras.utils.vis_utils import plot_model
 
@@ -189,7 +191,7 @@ class Model_Factory():
         # Compile model
         if cf.model_name == 'ssd':
             model.compile(loss=loss, optimizer=optimizer)
-        else
+        else:
             model.compile(loss=loss, metrics=metrics, optimizer=optimizer)
 
         # Show model structure

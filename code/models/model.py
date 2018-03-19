@@ -7,6 +7,8 @@ from keras.engine.training import GeneratorEnqueuer
 from tools.save_images import save_img3
 from tools.yolo_utils import *
 from keras.preprocessing import image
+from tools.data_loader import load_img
+import cv2
 """
 Interface for normal (one net) models and adversarial models. Objects of
 classes derived from Model are returned by method make() of the Model_Factory
@@ -129,6 +131,7 @@ class One_Net_Model(Model):
                     print ('      {}: {}'.format(k, metrics_dict[k]))
 
             if self.cf.problem_type == 'detection':
+                   
                 # Dataset and the model used
                 dataset_name = self.cf.dataset_name
                 #model_name = self.cf.model_name
@@ -164,10 +167,44 @@ class One_Net_Model(Model):
                 total_true = 0.
                 total_pred = 0.
                 start_time = time.time()
+
+		# only if yolo
+            	img_channel_index = 0
+
+  
                 for i, img_path in enumerate(imfiles):
-                    img = image.load_img(img_path, target_size=(input_shape[1], input_shape[2]))
+			# missing grayscale
+                    img = load_img(img_path,resize=None)
+		    #print(np.shape(img))
+		    #print(type(img))
+	    	    if self.cf.preprocessing_function is not None:
+			if self.cf.preprocessing_function is 'rgb2hsv':
+                    	    img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+			    
+
+
+
+                                       #gcn=cf.norm_gcn,
+                                      # zca_whitening=cf.norm_zca_whitening,
+                                       
+                                      # void_label=cf.dataset.void_class[0] if cf.dataset.void_class else None,
+                                      
+                                       
+                                       #class_mode=cf.dataset.class_mode,
+                                       
+                                       #bbox_util = cf.bbox_util if 'ssd' in cf.model_name else None
+                    
                     img = image.img_to_array(img)
-                    img = img / 255.
+			# scaling
+		    if self.cf.norm_rescale:
+			img *= self.cf.norm_rescale
+                    	#img = img / 255.
+			# wb
+		    if self.cf.norm_samplewise_center:
+            		img -= np.mean(img, axis=img_channel_index, keepdims=True)
+        	    if self.cf.norm_samplewise_std_normalization:
+            		img /= (np.std(img, axis=img_channel_index, keepdims=True) + 1e-7)
+
                     inputs.append(img.copy())
                     img_paths.append(img_path)
                     
@@ -203,9 +240,9 @@ class One_Net_Model(Model):
                                         ok += 1.
                                         break
                             # You can visualize/save per image results with this:
-                            #im = cv2.imread(img_path)
-                            #im = yolo_draw_detections(boxes_pred, im, priors, classes, detection_threshold, nms_threshold)
-                            #cv2.imshow('', im)
+                        #im = cv2.imread(img_path)
+           		#im = yolo_draw_detections(boxes_pred, im, priors, classes, detection_threshold, nms_threshold)
+                        #cv2.imwrite(['a'+str(i)+'.png'],im)#cv2.imshow('', im)
                             #cv2.waitKey(0)
                         inputs = []
                         img_paths = []
