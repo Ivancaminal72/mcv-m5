@@ -9,25 +9,25 @@ model_name                   = 'yolo'          # Model to use: one of 'yolo' or 
 freeze_layers_from           = None            # Freeze layers from 0 to this layer during training (Useful for finetunning) [None | 'base_model' | Layer_id]
 show_model                   = False           # Show the architecture layers
 load_imageNet                = False            # Load Imagenet weights and normalize following imagenet procedure
-load_pretrained              = False           # Load a pretrained model for doing finetuning
+load_pretrained              = True           # Load a pretrained model for doing finetuning
 weights_file                 = 'weights.hdf5'  # Training weight file name
 
 # Parameters
-train_model                  = True            # Train the model
+train_model                  = False            # Train the model
 test_model                   = True            # Test the model
 pred_model                   = False           # Predict using the model
 
 # Debug
-debug                        = False 	       # Use only few images for debuging
-debug_images_train           = 100             # N images for training in debug mode (-1 means all)
-debug_images_valid           = 100             # N images for validation in debug mode (-1 means all)
-debug_images_test            = 100             # N images for testing in debug mode (-1 means all)
+debug                        = True 	       # Use only few images for debuging
+debug_images_train           = 10             # N images for training in debug mode (-1 means all)
+debug_images_valid           = 10             # N images for validation in debug mode (-1 means all)
+debug_images_test            = 10             # N images for testing in debug mode (-1 means all)
 debug_n_epochs               = 2              # N of training epochs in debug mode
 
 # Batch sizes
-batch_size_train             = 16            # Batch size during training
-batch_size_valid             = 32            # Batch size during validation
-batch_size_test              = 32            # Batch size during testing
+batch_size_train             = 10            # Batch size during training
+batch_size_valid             = 10            # Batch size during validation
+batch_size_test              = 10            # Batch size during testing
 crop_size_train              = None            # Crop size during training (Height, Width) or None
 crop_size_valid              = None            # Crop size during validation
 crop_size_test               = None            # Crop size during testing
@@ -37,7 +37,7 @@ resize_test                  = None      # Resize the image during testing
 interpolation_order          = 1               # 0-5 Nearest-neighbor, Bi-linear, Bi-quadratic, Bi-cubi$
 
 # Data shuffle
-shuffle_train                = True            # Whether to shuffle the training data
+shuffle_train                = False            # Whether to shuffle the training data
 shuffle_valid                = False           # Whether to shuffle the validation data
 shuffle_test                 = False           # Whether to shuffle the testing data
 seed_train                   = 1924            # Random seed for the training shuffle
@@ -122,4 +122,4 @@ da_vertical_flip                   = False      # Rnd vertical flip
 da_spline_warp                     = False      # Enable elastic deformation
 da_warp_sigma                      = 10         # Elastic deformation sigma
 da_warp_grid_size                  = 3          # Elastic deformation gridSize
-da_save_to_dir                     = False      # Save the images for debuging
+da_save_to_dir                     = True      # Save the images for debuging

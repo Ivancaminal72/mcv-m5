@@ -19,6 +19,7 @@ from keras import backend as K
 
 from tools.save_images import save_img2
 from tools.yolo_utils import yolo_build_gt_batch
+import PIL.Image as pil_image # to save images
 
 def array_to_img(x, dim_ordering='default', scale=True):
     """Converts a 3D Numpy array to a PIL Image instance.
@@ -1348,11 +1349,11 @@ class DirectoryIterator(Iterator):
                 # YOLOLoss expects a particular batch_y format and shape
 	    if self.bbox_util == None:
 		# yolo + yolo tiny
-		batch_y = yolo_build_gt_batch(batch_y, self.image_shape, self.nb_class)	
+		batch_y = yolo_build_gt_batch(batch_y, self.image_shape, self.nb_class)
 	    else:
 		# ssd
 		batch_y = ssd_build_gt_batch(batch_y)
-                
+
         elif self.class_mode == None:
             return batch_x
 

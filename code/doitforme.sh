@@ -9,11 +9,20 @@
 #CUDA_VISIBLE_DEVICES=0 python train.py -c config/Belgium_classif_ImageNet.py -e Belgium_vgg_ImageNet
 #CUDA_VISIBLE_DEVICES=0 python train.py -c config/Belgium_classif_TT100K.py -e Belgium_TT100K
 #CUDA_VISIBLE_DEVICES=0 python train.py -c config/tt100k_classif_lamlam_spp_no_resize.py -e sabato_lamlam_spp_no_resize
-#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_wb.py -e udacity_wb
-CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_wb.py -e udacity_hsv_wb_debug
-#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_wb_sat_shift.py -e udacity_hsv_wb_s_shift
-#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_wb_sat_val_shift.py -e udacity_hsv_wb_sv_shift
-#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_sat_shift.py -e udacity_hsv_s_shift
+CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_wb_0.py -e photos_wb_0
+#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_wb.py -e udacity_hsv_wb_3
+#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_wb_sat_shift.py -e udacity_hsv_wb_s_shift_3
+#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_wb_sat_shift.py -e udacity_hsv_wb_s_shift_3
+#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_tt100k.py -e photos_tt100
+#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_0.py -e photos_hsv_s_0
+#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_0.py -e photos_hsv_sv_0
+#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_wb_0.py -e photos_hsv_wb_4
+#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_wb_0.py -e photos_hsv_wb_s_4
+#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_wb_0.py -e photos_hsv_wb_sv_0
+#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_wb_sat_val_shift.py -e udacity_hsv_wb_sv_shift_4
+#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_sat_shift.py -e udacity_hsv_s_shift_4
+#CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_detection_hsv_sat_val_shift.py -e udacity_hsv_sv_shift_4
+
 #CUDA_VISIBLE_DEVICES=0 python train.py -c config/tt100k_ssd.py -e tt100k_ssd
 #CUDA_VISIBLE_DEVICES=0 python train.py -c config/udacity_ssd.py -e udacity_ssd
 

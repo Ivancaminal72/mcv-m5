@@ -13,7 +13,7 @@ load_pretrained              = False           # Load a pretrained model for doi
 weights_file                 = 'weights.hdf5'  # Training weight file name
 
 # Parameters
-train_model                  = True            # Train the model
+train_model                  = False            # Train the model
 test_model                   = True            # Test the model
 pred_model                   = False           # Predict using the model
 
@@ -48,7 +48,7 @@ seed_test                    = 1924            # Random seed for the testing shu
 optimizer                    = 'rmsprop'       # Optimizer
 learning_rate                = 0.0001          # Training learning rate
 weight_decay                 = 0.              # Weight decay or L2 parameter norm penalty
-n_epochs                     = 30              # Number of epochs during training
+n_epochs                     = 40              # Number of epochs during training
 
 # Callback save results
 save_results_enabled         = False           # Enable the Callback
@@ -58,7 +58,7 @@ save_results_n_legend_rows   = 1               # Number of rows when showwing th
 
 # Callback early stoping
 earlyStopping_enabled        = True           # Enable the Callback
-earlyStopping_monitor        = 'avg_recall'    # Metric to monitor
+earlyStopping_monitor        = 'avg_iou'    # Metric to monitor
 earlyStopping_mode           = 'max'           # Mode ['max' | 'min']
 earlyStopping_patience       = 5             # Max patience for the early stopping
 earlyStopping_verbose        = 0               # Verbosity of the early stopping
@@ -77,7 +77,7 @@ plotHist_verbose             = 0               # Verbosity of the callback
 
 # Callback LR decay scheduler
 lrDecayScheduler_enabled     = True            # Enable the Callback
-lrDecayScheduler_epochs      = [10, 18, 26, 32]   # List of epochs were decay is applied or None for all epochs
+lrDecayScheduler_epochs      = [18, 26, 32]    # List of epochs were decay is applied or None for all epochs
 lrDecayScheduler_rate        = 5               # Decay rate (new_lr = lr / decay_rate). Usually between 2 and 10.
 
 # Callback learning rate scheduler
@@ -102,19 +102,19 @@ norm_fit_dataset                   = False     # If True it recompute std and me
 norm_rescale                       = 1/255.    # Scalar to divide and set range 0-1
 norm_featurewise_center            = False      # Substract mean - dataset
 norm_featurewise_std_normalization = False     # Divide std - dataset
-norm_samplewise_center             = True     # Substract mean - sample
-norm_samplewise_std_normalization  = True     # Divide std - sample
+norm_samplewise_center             = False     # Substract mean - sample
+norm_samplewise_std_normalization  = False    # Divide std - sample
 norm_gcn                           = False     # Global contrast normalization
 norm_zca_whitening                 = False     # Apply ZCA whitening
 cb_weights_method                  = None      # Label weight balance [None | 'median_freq_cost' | 'rare_freq_cost']
-preprocessing_function		   = None     #'rgb2hsv'
+preprocessing_function		   = 'rgb2hsv'
 # Data augmentation for training
 da_rotation_range                  = 0          # Rnd rotation degrees 0-180
 da_width_shift_range               = 0.       # Rnd horizontal shift
 da_height_shift_range              = 0.       # Rnd vertical shift
 da_shear_range                     = 0.       # Shear in radians
 da_zoom_range                      = 0.       # Zoom
-da_channel_shift_range             = 0.        # Channecf.l shifts
+da_channel_shift_range             = [0,0.2,0.1]        # Channecf.l shifts
 da_fill_mode                       = 'nearest'  # Fill mode
 da_cval                            = 0.         # Void image value
 da_horizontal_flip                 = False      # Rnd horizontal flip
@@ -122,4 +122,4 @@ da_vertical_flip                   = False      # Rnd vertical flip
 da_spline_warp                     = False      # Enable elastic deformation
 da_warp_sigma                      = 10         # Elastic deformation sigma
 da_warp_grid_size                  = 3          # Elastic deformation gridSize
-da_save_to_dir                     = False      # Save the images for debuging
+da_save_to_dir                     = False      # Save the images for debuging ( doesnt work!!!!!!)

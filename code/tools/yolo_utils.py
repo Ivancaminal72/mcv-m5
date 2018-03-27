@@ -23,7 +23,7 @@ def yolo_build_gt_batch(batch_gt,image_shape,num_classes,num_priors=5):
     for i,gt in enumerate(batch_gt):
         if gt.shape[0] == 0:
           # if there are no objects we'll get NaNs on YOLOLoss, set everything to one!
-          # TODO check if the following line harms learning in case of 
+          # TODO check if the following line harms learning in case of
           #      having lots of images with no objects
           batch_y[i] = np.ones((h*w,b,c+4+1+1+2+2))
           continue
@@ -111,7 +111,7 @@ def _softmax(x):
     return out
 
 def yolo_postprocess_net_out(net_out, anchors, labels, threshold, nms_threshold):
-	C = len(labels) 
+	C = len(labels)
         B = len(anchors)
         net_out = np.transpose(net_out, (1,2,0))
 	H,W = net_out.shape[:2]
@@ -191,11 +191,11 @@ def yolo_draw_detections(boxes, im, anchors, labels, threshold, nms_threshold):
                         thickness = 1
                         size=cv2.getTextSize(mess, font, scale, thickness)
                         cv2.rectangle(im, (left-2,top-size[0][1]-4), (left+size[0][0]+4,top), color, -1)
-                        cv2.putText(im, mess, (left+2,top-2), font, scale, (0,0,0), thickness, cv2.LINE_AA)
+                        cv2.putText(im, mess, (left+2,top-2), font, scale, (0,0,0), thickness, cv2.CV_AA)
 	return imgcv
 
 
-""" 
+"""
    Utilities to convert Darknet models' weights into keras hdf5 format
    code adapted from https://github.com/sunshineatnoon/Darknet.keras
 """

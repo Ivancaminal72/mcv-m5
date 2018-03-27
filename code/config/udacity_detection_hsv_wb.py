@@ -13,7 +13,7 @@ load_pretrained              = False           # Load a pretrained model for doi
 weights_file                 = 'weights.hdf5'  # Training weight file name
 
 # Parameters
-train_model                  = False            # Train the model
+train_model                  = True            # Train the model
 test_model                   = True            # Test the model
 pred_model                   = False           # Predict using the model
 
@@ -77,7 +77,7 @@ plotHist_verbose             = 0               # Verbosity of the callback
 
 # Callback LR decay scheduler
 lrDecayScheduler_enabled     = True            # Enable the Callback
-lrDecayScheduler_epochs      = [2, 4, 6, 8]    # List of epochs were decay is applied or None for all epochs
+lrDecayScheduler_epochs      = [10, 18, 26, 32]     # List of epochs were decay is applied or None for all epochs
 lrDecayScheduler_rate        = 5               # Decay rate (new_lr = lr / decay_rate). Usually between 2 and 10.
 
 # Callback learning rate scheduler

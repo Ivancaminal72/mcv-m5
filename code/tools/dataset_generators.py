@@ -12,7 +12,7 @@ class Dataset_Generators():
         std = cf.dataset.rgb_std
         cf.dataset.cb_weights = None
 
-        if cf.train_model:
+        if True:#cf.train_model:
             # Load training set
             print ('\n > Reading training set...')
             # Create the data generator with its data augmentation

@@ -7,7 +7,7 @@ from keras.engine.training import GeneratorEnqueuer
 from tools.save_images import save_img3
 from tools.yolo_utils import *
 from keras.preprocessing import image
-from tools.data_loader import load_img
+from tools.data_loader import load_img,array_to_img
 import cv2
 """
 Interface for normal (one net) models and adversarial models. Objects of
@@ -131,7 +131,7 @@ class One_Net_Model(Model):
                     print ('      {}: {}'.format(k, metrics_dict[k]))
 
             if self.cf.problem_type == 'detection':
-                   
+
                 # Dataset and the model used
                 dataset_name = self.cf.dataset_name
                 #model_name = self.cf.model_name
@@ -148,21 +148,29 @@ class One_Net_Model(Model):
                     print "Error: Dataset not found!"
                     quit()
                 priors = [[0.9,1.2], [1.05,1.35], [2.15,2.55], [3.25,3.75], [5.35,5.1]]
-                
+
                 input_shape = (self.cf.dataset.n_channels,
                         self.cf.target_size_test[0],
                         self.cf.target_size_test[1])
-                
+                if self.cf.da_save_to_dir:
+                    outdir_image = os.path.join(self.cf.savepath,'preprocessing')
+                    outdir_bbox = os.path.join(self.cf.savepath,'results')
+                    if not os.path.isdir(outdir_image):
+                        os.mkdir(outdir_image)
+                    if not os.path.isdir(outdir_bbox):
+                        os.mkdir(outdir_bbox)
 
-                
                 test_dir = test_gen.directory
-                imfiles = [os.path.join(test_dir,f) for f in os.listdir(test_dir) 
-                                    if os.path.isfile(os.path.join(test_dir,f)) 
+                imfiles = [os.path.join(test_dir,f) for f in os.listdir(test_dir)
+                                    if os.path.isfile(os.path.join(test_dir,f))
                                     and f.endswith('jpg')]
+                if self.cf.debug:
+                    imfiles = imfiles[0:self.cf.debug_images_test]
+
                 inputs = []
                 img_paths = []
                 chunk_size = 128 # we are going to process all image files in chunks
-                
+
                 ok = 0.
                 total_true = 0.
                 total_pred = 0.
@@ -171,43 +179,29 @@ class One_Net_Model(Model):
 		# only if yolo
             	img_channel_index = 0
 
-  
+
                 for i, img_path in enumerate(imfiles):
 			# missing grayscale
-                    img = load_img(img_path,resize=None)
-		    #print(np.shape(img))
-		    #print(type(img))
-	    	    if self.cf.preprocessing_function is not None:
-			if self.cf.preprocessing_function is 'rgb2hsv':
-                    	    img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-			    
-
-
-
-                                       #gcn=cf.norm_gcn,
-                                      # zca_whitening=cf.norm_zca_whitening,
-                                       
-                                      # void_label=cf.dataset.void_class[0] if cf.dataset.void_class else None,
-                                      
-                                       
-                                       #class_mode=cf.dataset.class_mode,
-                                       
-                                       #bbox_util = cf.bbox_util if 'ssd' in cf.model_name else None
-                    
+                    img = load_img(img_path,resize= self.cf.resize_test)
+                    if self.cf.preprocessing_function is not None:
+                        if self.cf.preprocessing_function is 'rgb2hsv':
+                            img = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
                     img = image.img_to_array(img)
-			# scaling
-		    if self.cf.norm_rescale:
-			img *= self.cf.norm_rescale
-                    	#img = img / 255.
-			# wb
-		    if self.cf.norm_samplewise_center:
-            		img -= np.mean(img, axis=img_channel_index, keepdims=True)
-        	    if self.cf.norm_samplewise_std_normalization:
-            		img /= (np.std(img, axis=img_channel_index, keepdims=True) + 1e-7)
-
+                    if self.cf.norm_rescale:
+                        img *= self.cf.norm_rescale
+                    if self.cf.norm_samplewise_center:
+                        img -= np.mean(img, axis=img_channel_index, keepdims=True)
+                    if self.cf.norm_samplewise_std_normalization:
+                        img /= (np.std(img, axis=img_channel_index, keepdims=True) + 1e-7)
+                    if self.cf.da_save_to_dir:
+                        im = array_to_img(img)
+                        if self.cf.preprocessing_function is not None:
+                            if self.cf.preprocessing_function is 'rgb2hsv':
+                                im = cv2.cvtColor(np.asarray(im), cv2.COLOR_HSV2RGB)
+                                cv2.imwrite(os.path.join(outdir_image,"pre_"+os.path.basename(img_path)),im)
                     inputs.append(img.copy())
                     img_paths.append(img_path)
-                    
+
                     if len(img_paths)%chunk_size == 0 or i+1 == len(imfiles):
                         print(str(i)+'/'+str(len(imfiles)))
                         inputs = np.array(inputs)
@@ -225,7 +219,7 @@ class One_Net_Model(Model):
                                 bx.probs[int(gt[j,0])] = 1.
                                 bx.x, bx.y, bx.w, bx.h = gt[j,1:].tolist()
                                 boxes_true.append(bx)
-                            
+
                             total_true += len(boxes_true)
                             true_matched = np.zeros(len(boxes_true))
                             for b in boxes_pred:
@@ -240,13 +234,23 @@ class One_Net_Model(Model):
                                         ok += 1.
                                         break
                             # You can visualize/save per image results with this:
+                            if self.cf.da_save_to_dir:
+                                img = cv2.imread(img_path)
+                                im_true = yolo_draw_detections(boxes_true, img, priors, classes, detection_threshold, nms_threshold)
+                                cv2.imwrite(os.path.join(outdir_bbox,"true_"+os.path.basename(img_path)),im_true)
+                                cv2.destroyAllWindows()
+                                im_pred = yolo_draw_detections(boxes_pred, img, priors, classes, detection_threshold, nms_threshold)
+                                cv2.imwrite(os.path.join(outdir_bbox,"pred_"+os.path.basename(img_path)),im_pred)
+                                #cv2.waitKey(0)
+
+                                #cv2.waitKey(0)
                         #im = cv2.imread(img_path)
            		#im = yolo_draw_detections(boxes_pred, im, priors, classes, detection_threshold, nms_threshold)
                         #cv2.imwrite(['a'+str(i)+'.png'],im)#cv2.imshow('', im)
                             #cv2.waitKey(0)
                         inputs = []
                         img_paths = []
-                    
+
                 print 'total_true:',total_true,' total_pred:',total_pred,' ok:',ok
                 p = 0. if total_pred == 0 else (ok/total_pred)
                 r = ok/total_true
@@ -254,11 +258,11 @@ class One_Net_Model(Model):
                 print('Recall     = ' + str(r))
                 f = 0. if (p + r) == 0 else (2*p*r/(p + r))
                 print('F-score    = '+str(f))
-                print ('{} images predicted in {:.5f} seconds. {:.5f} fps').format(len(imfiles), 
-                       time.time() - start_time, 
+                print ('{} images predicted in {:.5f} seconds. {:.5f} fps').format(len(imfiles),
+                       time.time() - start_time,
                         (len(imfiles)/(time.time() - start_time)))
-    
-    
+
+
 
             if self.cf.problem_type == 'segmentation':
                 # Compute Jaccard per class

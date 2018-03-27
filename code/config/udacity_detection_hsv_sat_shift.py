@@ -13,12 +13,12 @@ load_pretrained              = False           # Load a pretrained model for doi
 weights_file                 = 'weights.hdf5'  # Training weight file name
 
 # Parameters
-train_model                  = True            # Train the model
-test_model                   = False            # Test the model
+train_model                  = False            # Train the model
+test_model                   = True            # Test the model
 pred_model                   = False           # Predict using the model
 
 # Debug
-debug                        = True 	       # Use only few images for debuging
+debug                        = False 	       # Use only few images for debuging
 debug_images_train           = 100             # N images for training in debug mode (-1 means all)
 debug_images_valid           = 100             # N images for validation in debug mode (-1 means all)
 debug_images_test            = 100             # N images for testing in debug mode (-1 means all)
@@ -58,7 +58,7 @@ save_results_n_legend_rows   = 1               # Number of rows when showwing th
 
 # Callback early stoping
 earlyStopping_enabled        = True           # Enable the Callback
-earlyStopping_monitor        = 'avg_recall'    # Metric to monitor
+earlyStopping_monitor        = 'avg_iou'    # Metric to monitor
 earlyStopping_mode           = 'max'           # Mode ['max' | 'min']
 earlyStopping_patience       = 5             # Max patience for the early stopping
 earlyStopping_verbose        = 0               # Verbosity of the early stopping
@@ -77,7 +77,7 @@ plotHist_verbose             = 0               # Verbosity of the callback
 
 # Callback LR decay scheduler
 lrDecayScheduler_enabled     = True            # Enable the Callback
-lrDecayScheduler_epochs      = [2, 4, 6, 8]    # List of epochs were decay is applied or None for all epochs
+lrDecayScheduler_epochs      = [18, 26, 32]    # List of epochs were decay is applied or None for all epochs
 lrDecayScheduler_rate        = 5               # Decay rate (new_lr = lr / decay_rate). Usually between 2 and 10.
 
 # Callback learning rate scheduler
@@ -122,4 +122,4 @@ da_vertical_flip                   = False      # Rnd vertical flip
 da_spline_warp                     = False      # Enable elastic deformation
 da_warp_sigma                      = 10         # Elastic deformation sigma
 da_warp_grid_size                  = 3          # Elastic deformation gridSize
-da_save_to_dir                     = True      # Save the images for debuging
+da_save_to_dir                     = False      # Save the images for debuging
