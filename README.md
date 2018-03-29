@@ -40,12 +40,12 @@ Task E: We wrote the report
 #### Short explanation of the code in the repository
 Task A: We have created a bash script that returns 3 txt (train, test, val) that contain a list "subfolder_name; number_of_images".  <br/>
 Task B: We ran the code for the KITTY, for trainning and validation. Not for test  <br/>
-Task Cii: Our own CNN implementation, we named it LamLam (as our team). 
+Task Cii: Our own CNN implementation, we named it LamLam (as our team).
 It has two parallel sequential processes of convolutional layers of different sizes that allow to capture two different types of information.
 
 #### Results of the different experiments
 Task A. Run the provided code
-### Analyze the dataset: 
+### Analyze the dataset:
 The images are 64x64 pixels and differ in point of view, background, illumination and HUE. Furthermore, some images are slightly blurred.
 
 ### Count the number of samples per class:
@@ -78,7 +78,7 @@ Loss with Belgium traffic signs dataset:  <br/>
 We ran the KITTI dataset for the training and the validation datasets since the test set is private and we can't access it.
 
 ## Task Cii: Implement a new network
-We used a CNN that was tested in the Machine Learning course of the same Master program. Such architecture is shown in 
+We used a CNN that was tested in the Machine Learning course of the same Master program. Such architecture is shown in
 <p align="center">
 <img src="https://github.com/BourbonCreams/mcv-m5/blob/master/imgs/CNN_LamLam.PNG" height=500"/>
 </p>
@@ -87,7 +87,7 @@ and it performed well with a classification problem that involved scenery images
 
 The idea that led to the development of a network with two parallel sequential processes of convolutional layers of different sizes was to allow to capture two different types of information, the first one being the small details and texture and the second one to capture the composition and details in the bigger picture. <br/>
 
-The model's parameters were optimized using a random search when the model was first used, i.e. in the Machine Learning course.	
+The model's parameters were optimized using a random search when the model was first used, i.e. in the Machine Learning course.
 
 ## Task D: Boost the performance of your network
 We boost the performance of the network by using a SPP layer (Spatial Pyramid Pooling) instead of a costum pooling layer in the end of each tower (to concatenate the two towers, their shape must agree).<br/>
@@ -101,13 +101,13 @@ The Training is done over TT100K dataset and testing is done over the Belgium da
 ## Instructions for using the code
 CUDA_VISIBLE_DEVICES=0 python train.py -c config/dataset.py -e expName
 
-## Indicate the level of completeness of the goals of this week 
-100% 
+## Indicate the level of completeness of the goals of this week
+100%
 
 ## Link to the Google Slide presentation
 <a href="https://drive.google.com/open?id=1xdwzScs1yIeNa9y7kvcai-PCpIQG_0BUL5POIirqQiM">Slides Week 2 </a>
 
-# Link to a Google Drive with the weights of the model 
+# Link to a Google Drive with the weights of the model
 <a href="https://drive.google.com/open?id=1prZl1Nyk6i8_jCgN52oghrHRBnsVwyZg"> Weights </a>
 
 
@@ -130,7 +130,7 @@ The number of signs in the annotation files do not always includes all the traff
 They differ in the number of traffic signs, the orientation and illumination. <br/>
 
 Task B: - <br/>
-Task C: SSD object detector, Keras implementation<br/> 
+Task C: SSD object detector, Keras implementation<br/>
 Task D: Run Udacity dataset for epochs to 40 and tune the colors (saturation) to solve the challenges of the dataset. <br/>
 Task E: Data augmentation <br/>
 

@@ -1342,17 +1342,16 @@ class DirectoryIterator(Iterator):
             for i, label in enumerate(self.classes[index_array]):
                 batch_y[i, label] = 1.
         elif self.class_mode == 'detection':
-            #if self.model_name == 'ssd':
-            #    batch_y = self.bbox_util.ssd_build_gt_batch(batch_y)
-            #elif  self.model_name == 'yolo' or self.model_name == 'tiny-yolo':
-                # TODO detection: check model, other networks may expect a different batch_y format and shape
-                # YOLOLoss expects a particular batch_y format and shape
-	    if self.bbox_util == None:
-		# yolo + yolo tiny
-		batch_y = yolo_build_gt_batch(batch_y, self.image_shape, self.nb_class)
-	    else:
-		# ssd
-		batch_y = ssd_build_gt_batch(batch_y)
+    	    if self.bbox_util == None:
+                batch_y = yolo_build_gt_batch(batch_y, self.image_shape, self.nb_class) # yolo + yolo tiny
+    	    else:
+                batch_y = ssd_build_gt_batch(batch_y) #ssd
+        elif self.class_mode == 'segmentation':
+            seg_labels = np.zeros(( batch_y.shape[0], batch_y.shape[1], batch_y.shape[2], self.nb_class -1))
+            for b in range(batch_y.shape[0]):
+              for c in range(self.nb_class-1):
+                seg_labels[b, : , : , c ] = np.squeeze((batch_y[b,:,:] == c ).astype(int))
+            batch_y = np.reshape(seg_labels, ( batch_y.shape[0], batch_y.shape[1] * batch_y.shape[2], self.nb_class -1))
 
         elif self.class_mode == None:
             return batch_x
