@@ -206,7 +206,7 @@ CUDA_VISIBLE_DEVICES=0 python train.py -c config/dataset.py -e expName <br/>
 <a href="https://docs.google.com/presentation/d/1CQr7opcnp8sZqT4n6qzXDiB4zvOCfZbNm3vmb70mtBw/edit?usp=sharing"> Google Slides </a>
 
 ### Summaries of the two papers 
-<a href="https://drive.google.com/open?id=1VYtMOV2C7_Hu8RWosBKHoK6gU4sEQEzX9hx0OHHMS_I"> FCN </a>
+<a href="https://drive.google.com/open?id=1VYtMOV2C7_Hu8RWosBKHoK6gU4sEQEzX9hx0OHHMS_I"> FCN </a>  and 
 <a href="https://drive.google.com/open?id=1edZgYJHvHG2pP6HB3JyrsoBnbzMBM34BMMxj2tPnSik"> U-Net </a>
 
 
