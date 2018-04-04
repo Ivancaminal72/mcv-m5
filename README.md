@@ -179,3 +179,29 @@ We boosted the performance of the network by implementing the previous solution 
 
 ### Link to a Google Drive with the weights of the trained models
 <a href="https://drive.google.com/open?id=1cU9eV9GEl9Gmcz_LMSCrtbELU0tlOxcv">  Weights </a>  <br/>
+
+
+# === WEEK 5/6 ===
+
+### short abstract about what you implemented
+Task (a): Run the provided code (YOLO-Traffic Sign)<br/>
+Task (B): Read two papers: FCN for Semantic Segmentation and U-Net.<br/>
+Task (c): Implement a new network, modifying a keras implemented<br/>
+Task (d): Train the network on a different dataset <br/>
+
+### short exxplanation about the code in the repostory
+Task (a): We used the preconfigured experiment file (camvid_segmentation.py) to segment objects with the FCN8 model.
+Then we analysed the dataset and <a href= "https://drive.google.com/open?id=1DIopyfM3Wg2niLuBZgtusZNMgLWBS2WCZVhSy03qhpo"> evaluate </a> on train, val and test sets.<br/>
+Task (B): -<br/>
+Task (c): We implemented a new network,U-Net, modifying a keras implemented.<br/>
+Task (d): Train the network on a different datasets, kitti, cambid, Cityscapes and Synthia_rand_cityscapes <br/>
+
+###  Instructions for running the code
+CUDA_VISIBLE_DEVICES=0 python train.py -c config/dataset.py -e expName <br/>
+
+### Indicate the level of comppletness of the goals of this week
+80%
+
+### Link to google drive with the slides
+<a href="https://docs.google.com/presentation/d/1CQr7opcnp8sZqT4n6qzXDiB4zvOCfZbNm3vmb70mtBw/edit?usp=sharing" Google Slides </a>
+
