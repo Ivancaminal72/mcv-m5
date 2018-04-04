@@ -191,7 +191,7 @@ Task (d): Train the network on a different dataset <br/>
 
 ### short exxplanation about the code in the repostory
 Task (a): We used the preconfigured experiment file (camvid_segmentation.py) to segment objects with the FCN8 model.
-Then we analysed the dataset and <a href= "https://drive.google.com/open?id=1DIopyfM3Wg2niLuBZgtusZNMgLWBS2WCZVhSy03qhpo"> evaluate </a> on train, val and test sets.<br/>
+Then we <a href= "https://drive.google.com/open?id=1DIopyfM3Wg2niLuBZgtusZNMgLWBS2WCZVhSy03qhpo"> analysed </a> the dataset and  evaluate  on train, val and test sets.<br/>
 Task (B): -<br/>
 Task (c): We implemented a new network,U-Net, modifying a keras implemented.<br/>
 Task (d): Train the network on a different datasets, kitti, cambid, Cityscapes and Synthia_rand_cityscapes <br/>
