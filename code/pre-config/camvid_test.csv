@@ -1,0 +1,14 @@
+Class,Number pix,pix_per_img,num of imgs
+,,172800,233
+building,9906732
+fence,476807
+byciclist,76220
+tree,4530895
+void,1543383
+sky,6870982
+sign,406612
+column_pole,473895
+pedestrian,255232
+car,1599124
+sidewalk,3731857
+road,10390661

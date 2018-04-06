@@ -1,0 +1,22 @@
+Class,Number pix,pix_per_img,num of imgs
+,,2097152,2975
+building,1259776091
+bicycle,22849664
+fence,48487162
+wall,36211223
+sky,221459496
+traffic light,11509943
+terrain,63965201
+traffic sign,30521298
+person,67202363
+pole,67768934
+train,12863940
+truck,14775009
+vegetation,878734354
+car,386502819
+bus,12995807
+sidewalk,336031674
+void,0
+rider,7444910
+road,2036049361
+motorcycle,5445904
