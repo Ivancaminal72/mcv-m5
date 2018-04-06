@@ -8,10 +8,28 @@ if dim_ordering == 'th':
 else:
     from tensorflow.python.framework import ops
 
+def jaccard_coef(y_true, y_pred, eps=1e-37):
+    y_pred = tf.one_hot(tf.argmax(y_pred,axis=2), tf.shape(y_pred)[2])
+    intersection = K.sum(y_true * y_pred, axis=(1))
+    union = K.sum(y_true, axis=(1)) + K.sum(y_pred, axis=(1)) - intersection
+    mean  = K.mean( (intersection ) / (union + eps), axis=(1))
+    mean  = tf.clip_by_value(mean, 0.0, 1.0)
+    return K.mean( mean, axis=0)
+
+def jaccard_coef_smooth(y_true, y_pred, smooth=0.0):
+    '''Average jaccard coefficient per batch.'''
+    intersection = K.sum(y_true * y_pred, axis=(1))
+    union = K.sum(y_true, axis=(1)) + K.sum(y_pred, axis=(1)) - intersection
+    mean  = K.mean( (intersection + smooth) / (union + smooth), axis=(1))
+    return K.mean( mean, axis=0)
+
 def cce_flatt(void_class, weights_class):
     def categorical_crossentropy_flatt(y_true, y_pred):
         '''Expects a binary class matrix instead of a vector of scalar classes.
         '''
+        print(np.shape(y_true))
+        print(np.shape(y_pred))
+        #print('categorical_crossentropy_flatt')
         if dim_ordering == 'th':
             y_pred = K.permute_dimensions(y_pred, (0, 2, 3, 1))
         shp_y_pred = K.shape(y_pred)
@@ -53,6 +71,35 @@ def cce_flatt(void_class, weights_class):
 
         return K.mean(out)  # b01 -> b,01
     return categorical_crossentropy_flatt
+
+
+def pix_weight_loss(void_class, weights_class):
+    def categorical_crossentropy_weighted(y_true, y_pred):
+        '''Expects a binary class matrix instead of a vector of scalar classes.
+        '''
+        print(np.shape(y_true))
+        print(weights_class)
+        #print('categorical_crossentropy_flatt')
+        #if dim_ordering == 'th':
+
+        # remove void classes from cross_entropy
+
+        out = K.categorical_crossentropy(y_pred, y_true)
+        if weights_class is None:
+            return(K.mean(out))
+        weight_map = K.zeros_like(out)
+        print(weight_map)
+        for i in range(len(weights_class)):
+            weight_map[y_true==i]=weights_class[i]
+        out =K.tf.multiply(out, weight_map)
+        # Class balancing
+        # if weights_class is not None:
+        #     weights_class_var = K.variable(value=weights_class)
+        #     class_balance_w = weights_class_var[y_true].astype(K.floatx())
+        #     out = out * class_balance_w
+
+        return K.sum(out)  # b01 -> b,01
+    return categorical_crossentropy_weighted
 
 
 def IoU(n_classes, void_labels):

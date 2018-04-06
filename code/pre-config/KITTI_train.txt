@@ -1,8 +1,0 @@
-background;28189
-Car;23076
-Cyclist;1337
-Pedestrian;3637
-Person_sitting;173
-Tram;405
-Truck;876
-Van;2367

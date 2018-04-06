@@ -45,7 +45,7 @@ class One_Net_Model(Model):
             print('\n > Training the model...')
             hist = self.model.fit_generator(generator=train_gen,
                                             steps_per_epoch=self.cf.dataset.n_images_train//self.cf.batch_size_train,
-                                            nb_epoch=self.cf.n_epochs,
+                                            epochs=self.cf.n_epochs,
                                             verbose=1,
                                             callbacks=cb,
                                             validation_data=valid_gen,
@@ -83,10 +83,11 @@ class One_Net_Model(Model):
                 x_true = data[0]
                 y_true = data[1].astype('int32')
 
-                # Get prediction for this minibatch
+                # Get prediction for this minibatch -- KERAS
                 y_pred = self.model.predict(x_true)
 
-                # Compute the argmax
+                # Compute the argmax -- assuming its 'th'
+                # argmax- squeeze!!
                 y_pred = np.argmax(y_pred, axis=1)
 
                 # Reshape y_true
@@ -267,16 +268,16 @@ class One_Net_Model(Model):
             if self.cf.problem_type == 'segmentation':
                 # Compute Jaccard per class
                 metrics_dict = dict(zip(self.model.metrics_names, test_metrics))
-                I = np.zeros(self.cf.dataset.n_classes)
-                U = np.zeros(self.cf.dataset.n_classes)
-                jacc_percl = np.zeros(self.cf.dataset.n_classes)
-                for i in range(self.cf.dataset.n_classes):
-                    I[i] = metrics_dict['I'+str(i)]
-                    U[i] = metrics_dict['U'+str(i)]
-                    jacc_percl[i] = I[i] / U[i]
-                    print ('   {:2d} ({:^15}): Jacc: {:6.2f}'.format(i,
-                                                                     self.cf.dataset.classes[i],
-                                                                     jacc_percl[i]*100))
-                # Compute jaccard mean
-                jacc_mean = np.nanmean(jacc_percl)
-		print ('   Jaccard mean: {}'.format(jacc_mean))
+                # I = np.zeros(self.cf.dataset.n_classes)
+                # U = np.zeros(self.cf.dataset.n_classes)
+                # jacc_percl = np.zeros(self.cf.dataset.n_classes)
+        #         for i in range(self.cf.dataset.n_classes):
+        #             I[i] = metrics_dict['I'+str(i)]
+        #             U[i] = metrics_dict['U'+str(i)]
+        #             jacc_percl[i] = I[i] / U[i]
+        #             print ('   {:2d} ({:^15}): Jacc: {:6.2f}'.format(i,
+        #                                                              self.cf.dataset.classes[i],
+        #                                                              jacc_percl[i]*100))
+        #         # Compute jaccard mean
+        #         jacc_mean = np.nanmean(jacc_percl)
+		# print ('   Jaccard mean: {}'.format(jacc_mean))

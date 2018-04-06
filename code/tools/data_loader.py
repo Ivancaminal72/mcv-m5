@@ -14,12 +14,27 @@ import os
 import SimpleITK as sitk
 import threading
 import cv2
+from matplotlib import cm
 
 from keras import backend as K
 
 from tools.save_images import save_img2
 from tools.yolo_utils import yolo_build_gt_batch
 import PIL.Image as pil_image # to save images
+
+def discrete_cmap(N, base_cmap='cubehelix'):
+    """Create an N-bin discrete colormap from the specified input map"""
+
+    # Note that if base_cmap is a string or None, you can simply do
+    #    return plt.cm.get_cmap(base_cmap, N)
+    # The following works for string, None, or a colormap instance:
+
+    base = cm.jet(N)
+    print(type(base))
+    print(base)
+    #color_list = base(np.linspace(0, 1, N))
+    #cmap_name = base.name + str(N)
+    return base
 
 def array_to_img(x, dim_ordering='default', scale=True):
     """Converts a 3D Numpy array to a PIL Image instance.
@@ -948,7 +963,7 @@ class ImageDataGenerator(object):
                 # Load image and mask
                 mask = io.imread(file_name)
                 mask = mask.astype('int32')
-
+                print(file_name)
                 # Count elements
                 unique_labels, counts_label = np.unique(mask, return_counts=True)
                 count_per_label[unique_labels] += counts_label
@@ -960,6 +975,7 @@ class ImageDataGenerator(object):
 
             # Compute the priors
             priors = count_per_label/total_count_per_label
+            print(priors)
 
             # Compute the weights
             self.weights_median_freq_cost = np.median(priors) / priors
@@ -977,6 +993,7 @@ class ImageDataGenerator(object):
             elif cb_weights_method == 'rare_freq_cost':
                 self.cb_weights = self.weights_rare_freq_cost
                 print ('Weights rare_freq_cost: ' + str(self.weights_rare_freq_cost))
+
             else:
                 raise ValueError('Unknown class balancing method: ' + cb_weights_method)
 
@@ -1320,8 +1337,10 @@ class DirectoryIterator(Iterator):
                                                                   format=self.save_format)
 
                 if self.class_mode == 'segmentation':
-                    nclasses = self.classes  # TODO: Change
-                    color_map = sns.hls_palette(nclasses+1)
+                    nclasses = len(self.classes)  # TODO: Change
+                    print(nclasses)
+                    print(self.classes)
+                    color_map = discrete_cmap(nclasses+1)
                     void_label = nclasses
                     save_img2(batch_x[i], batch_y[i],
                               os.path.join(self.save_to_dir, fname), color_map,
@@ -1342,17 +1361,16 @@ class DirectoryIterator(Iterator):
             for i, label in enumerate(self.classes[index_array]):
                 batch_y[i, label] = 1.
         elif self.class_mode == 'detection':
-            #if self.model_name == 'ssd':
-            #    batch_y = self.bbox_util.ssd_build_gt_batch(batch_y)
-            #elif  self.model_name == 'yolo' or self.model_name == 'tiny-yolo':
-                # TODO detection: check model, other networks may expect a different batch_y format and shape
-                # YOLOLoss expects a particular batch_y format and shape
-	    if self.bbox_util == None:
-		# yolo + yolo tiny
-		batch_y = yolo_build_gt_batch(batch_y, self.image_shape, self.nb_class)
-	    else:
-		# ssd
-		batch_y = ssd_build_gt_batch(batch_y)
+    	    if self.bbox_util == None:
+                batch_y = yolo_build_gt_batch(batch_y, self.image_shape, self.nb_class) # yolo + yolo tiny
+    	    else:
+                batch_y = ssd_build_gt_batch(batch_y) #ssd
+        elif self.class_mode == 'segmentation':
+            seg_labels = np.zeros(( batch_y.shape[0], batch_y.shape[1], batch_y.shape[2], self.nb_class -1))
+            for b in range(batch_y.shape[0]):
+              for c in range(self.nb_class-1):
+                seg_labels[b, : , : , c ] = np.squeeze((batch_y[b,:,:] == c ).astype(int))
+            batch_y = np.reshape(seg_labels, ( batch_y.shape[0], batch_y.shape[1] * batch_y.shape[2], self.nb_class -1))
 
         elif self.class_mode == None:
             return batch_x

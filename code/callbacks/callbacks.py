@@ -171,8 +171,8 @@ class Save_results(Callback):
     def on_epoch_end(self, epoch, logs={}):
 
         # Create a data generator
-        enqueuer = GeneratorEnqueuer(self.generator, pickle_safe=False)
-        enqueuer.start(nb_worker=1, max_q_size=1, wait_time=0.05)
+        enqueuer = GeneratorEnqueuer(self.generator, wait_time=0.05)
+        enqueuer.start(workers=1, max_queue_size=1)
 
         # Process the dataset
         for _ in range(self.epoch_length):
@@ -186,21 +186,28 @@ class Save_results(Callback):
                 else:
                     time.sleep(0.05)
             #data = data_gen_queue.get()
-            x_true = data[0]
-            y_true = data[1].astype('int32')
+            x_true = data[1][0]
+            y_true = data[1][1].astype('int32')
 
             # Get prediction for this minibatch
             y_pred = self.model.predict(x_true)
 
             # Reshape y_true and compute the y_pred argmax
             if K.image_dim_ordering() == 'th':
+                #Keras API 2.0
+               # y_pred = K.resize_images(y_pred, x_true.shape[2], x_true.shape[3], 'channels_first')
+                y_pred = np.reshape(y_pred, (y_pred.shape[0], self.model.outputHeight, self.model.outputWidth, x_true.shape[3]))
+                y_true = np.reshape(y_true, (y_true.shape[0],y_true.shape[1] ,x_true.shape[2], x_true.shape[3]))
                 y_pred = np.argmax(y_pred, axis=1)
-                y_true = np.reshape(y_true, (y_true.shape[0], y_true.shape[2],
-                                             y_true.shape[3]))
+                y_true = np.argmax(y_true, axis=1)
             else:
+               # y_pred = K.resize_images(y_pred, x_true.shape[1], x_true.shape[2], 'channels_last')
+                y_pred = np.reshape(y_pred, (y_true.shape[0], self.model.outputHeight, self.model.outputWidth, y_pred.shape[2]))
+                print(y_true.shape)
+                y_true = np.reshape(y_true, (y_pred.shape[0], x_true.shape[1], x_true.shape[2], y_true.shape[2]))
                 y_pred = np.argmax(y_pred, axis=3)
-                y_true = np.reshape(y_true, (y_true.shape[0], y_true.shape[1],
-                                             y_true.shape[2]))
+                y_true = np.argmax(y_true, axis=3)
+
             # Save output images
             save_img3(x_true, y_true, y_pred, self.save_path, epoch,
                       self.color_map, self.classes, self.tag+str(_), self.void_label,

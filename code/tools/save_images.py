@@ -11,6 +11,7 @@ import math
 import skimage.io as io
 from keras import backend as K
 dim_ordering = K.image_dim_ordering()
+import subprocess
 
 
 # Normalizes image to 0-1 range
@@ -61,7 +62,7 @@ def find_font_size(max_width, classes, font_file, max_font_size=100):
 
 # Draw class legend in an image
 def draw_legend(w, color_map, classes, n_lines=3, txt_color=(255, 255, 255),
-                font_file="fonts/Cicle_Gordita.ttf"):
+                font_file="./fonts/Cicle_Gordita.ttf"):
 
     # Compute legend sizes
     n_classes = len(color_map)
@@ -129,7 +130,7 @@ def save_img3(image_batch, mask_batch, output, out_images_folder, epoch,
         img = image_batch[j]
         if dim_ordering == 'th':
             img = img.transpose((1, 2, 0))
-
+            
         #img = norm_01(img, mask_batch[j], void_label)*255
         img = norm_01(img, mask_batch[j], -1)*255
 
@@ -192,8 +193,9 @@ def save_img4(image_batch, mask_batch, output, output2, out_images_folder,
 def save_img2(img, mask, fname, color_map, void_label):
     if dim_ordering == 'th':
         img = img.transpose((1, 2, 0))
-
-    mask = mask.reshape(mask.shape[1:3])
+    print(color_map)
+    print(void_label)
+    #mask = mask.reshape(mask.shape[1:3])
     img = norm_01(img, mask, void_label)
 
     label_mask = my_label2rgboverlay(mask,
