@@ -177,15 +177,39 @@ We boosted the performance of the network by implementing the previous solution 
 
 # === WEEK 5-6 ===
 ## Short abstract about what you implemented (5 lines max) 
+Task (a): Run the provided code (YOLO-Traffic Sign)<br/>
+Task (B): Read two papers: FCN for Semantic Segmentation and U-Net.<br/>
+Task (c): Implement a new network, modifying a keras implemented<br/>
+Task (d): Train the network on a different dataset <br/>
+
 ## Short explanation of the code in the repository 
+Task (a): We used the preconfigured experiment file (camvid_segmentation.py) to segment objects with the FCN8 model.
+Then we <a href= "https://drive.google.com/open?id=1DIopyfM3Wg2niLuBZgtusZNMgLWBS2WCZVhSy03qhpo"> analysed </a> the dataset and  evaluate  on train, val and test sets.<br/>
+Task (B): -<br/>
+Task (c): We implemented a new network,U-Net, modifying a keras implemented.<br/>
+Task (d): Train the network on a different datasets, kitti, cambid, Cityscapes and Synthia_rand_cityscapes <br/>
+
 ## Results of the different experiments 
+<a href="https://drive.google.com/open?id=14HRC3ptKjcdsh1dP8n4EuXx_JTnwh46K6ttrwsW0Xks"> All experiments results </a>  <br/>
+
 ## Instructions for using the code 
+CUDA_VISIBLE_DEVICES=0 python train.py -c config/dataset.py -e expName <br/>
+
 ## Indicate the level of completeness of the goals of this week 
+100%
+
 ## Link to a Google Drive with the weights of the model
+<a href="https://docs.google.com/presentation/d/1CQr7opcnp8sZqT4n6qzXDiB4zvOCfZbNm3vmb70mtBw/edit?usp=sharing"> Google Slides </a>
+
 ## Tasks:
 ### Task A Run the provided code
+We fixed some errors to be able to run the initial code
+
 ### Task B Read two papers
-### Task C Implement a new network
-### Task D Train the networks on a different dataset
-### Task E Boost the performance of your network
+<a href="https://drive.google.com/open?id=1VYtMOV2C7_Hu8RWosBKHoK6gU4sEQEzX9hx0OHHMS_I"> FCN </a>  and 
+<a href="https://drive.google.com/open?id=1edZgYJHvHG2pP6HB3JyrsoBnbzMBM34BMMxj2tPnSik"> U-Net </a>
+
+### Task C Implement a new network **
+### Task D Train the networks on a different dataset **
+### Task E Boost the performance of your network **
 	
