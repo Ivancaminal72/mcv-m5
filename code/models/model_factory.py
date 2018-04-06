@@ -6,8 +6,6 @@ import numpy as np
 
 from metrics.metrics import cce_flatt, IoU, YOLOLoss, YOLOMetrics, MultiboxLoss, SSDMetrics, jaccard_coef,pix_weight_loss
 from tools.ssd_utils import BBoxUtility
-
-
 from keras import backend as K
 from keras.utils.vis_utils import plot_model
 
@@ -23,6 +21,7 @@ from models.ssd import build_ssd
 
 # Detection models
 from models.yolo import build_yolo
+
 # Segmentation models
 from models.fcn8 import build_fcn8
 from models.unet import build_unet
@@ -126,7 +125,7 @@ class Model_Factory():
         if cf.model_name == 'fcn8':
             model = build_fcn8(in_shape, cf.dataset.n_classes, cf.weight_decay,
                                freeze_layers_from=cf.freeze_layers_from,
-                               load_pretrained=cf.load_imageNet)
+                               path_weights=cf.load_imageNet)
         elif cf.model_name == 'unet':
             model = build_unet(in_shape, cf.dataset.n_classes, cf.weight_decay,
                                freeze_layers_from=cf.freeze_layers_from,
