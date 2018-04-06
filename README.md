@@ -150,7 +150,19 @@ CUDA_VISIBLE_DEVICES=0 python train.py -c config/dataset.py -e expName
 
 ## Tasks:
 ### Task A Run the provided code
-We fixed some errors to be able to run the initial code
+We fixed some errors to be able to run the initial code.<br/>
+From the <a href="https://drive.google.com/open?id=1v05V3nCyqD8BxZZoJI0pJf1MvlsEqxU-eOVMx6MzBgA"> dataset analysis </a> we can conclude that: <br/>
+
+TT100k dataset:  The number of signs in the annotation files do not always includes all the traffic sign that exist in the image, the selective choices are not clear. The images differ in the number of traffic signs, orientation and illumination.<br/>
+Udacity dataset: consist of urban images while the camera always facing toward to road including the dashboard. There is a big difference between the train and test images. <br/>
+Training images are in strong mid-day light, mostly saturated colors, shades and reflective light (e.g. reflective light from the windshield). While test images have more vivid colors in different time of day. <br/>
+
+
+There is a large variance in the luminance in the photos, has a lot of un balance and disorders in the luminance (for example : reflective light from the windshield).
+ <br/>
+Propose (and implement) solutions. <br/>
+A solution can be to pre process the images - tunning the colors (saturation). <br/>
+Or training using data augmentation on the color channel - creating more variance in the color spectrum. <br/>
 
 ### Task B Read two papers
 Summaries:  <br/>
@@ -165,12 +177,6 @@ Set-up new experiments files to detect among cars, pedestrians, and trucks on th
 Increment the number of epochs to 40.
 We ran the yolo with plain udacity (for comparison with TT100K) <br/><br/>
 
-Analyze the challenges of the dataset as it is. <br/>
-There is a large variance in the luminance in the photos, has a lot of un balance and disorders in the luminance (for example : reflective light from the windshield).
- <br/>
-Propose (and implement) solutions. <br/>
-A solution can be to pre process the images - tunning the colors (saturation). <br/>
-Or training using data augmentation on the color channel - creating more variance in the color spectrum. <br/>
 
 ### Task E Boost the performance of your network
 We boosted the performance of the network by implementing the previous solution (pro process images changing color saturation) and applying data augmentation. <br/>
@@ -204,6 +210,16 @@ CUDA_VISIBLE_DEVICES=0 python train.py -c config/dataset.py -e expName <br/>
 ## Tasks:
 ### Task A Run the provided code
 We fixed some errors to be able to run the initial code
+From the <a href="https://drive.google.com/open?id=1DIopyfM3Wg2niLuBZgtusZNMgLWBS2WCZVhSy03qhpo"> dataset analysis </a> we can conclide that: <br/>
+
+Kitti and Camvid have the same classes. <br/>
+Kitti dataset: the images are taken at the same time of day and there is an important contrast between sun and shadow, making it difficult to segment them. <br/>
+Camvid dataset: the streets are more similar, but differ at the time of day, that we can observe in the lighting. <br/>
+
+Cityscapes and Synthia_rand_cityscapes have the same classes. <br/>
+Cityscapes dataset: it is similar in terms of illumination and color even though they are from different german cities. These images differ more in content (pedestrians, bicycles, vehicles, etc) <br/>
+Synthia_rand_cityscapes differs on the scene. There are groups of the same scene which differ on the moment of the day. We can observe it on the illumination, shadows or even the rain.
+
 
 ### Task B Read two papers
 <a href="https://drive.google.com/open?id=1VYtMOV2C7_Hu8RWosBKHoK6gU4sEQEzX9hx0OHHMS_I"> FCN </a>  and 
