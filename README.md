@@ -210,7 +210,7 @@ CUDA_VISIBLE_DEVICES=0 python train.py -c config/dataset.py -e expName <br/>
 ## Tasks:
 ### Task A Run the provided code
 We fixed some errors to be able to run the initial code
-From the <a href="https://drive.google.com/open?id=1DIopyfM3Wg2niLuBZgtusZNMgLWBS2WCZVhSy03qhpo"> dataset analysis </a> we can conclide that: <br/>
+From the <a href="https://drive.google.com/open?id=1DIopyfM3Wg2niLuBZgtusZNMgLWBS2WCZVhSy03qhpo"> dataset analysis </a> we can conclude that: <br/>
 
 Kitti and Camvid have the same classes. <br/>
 Kitti dataset: the images are taken at the same time of day and there is an important contrast between sun and shadow, making it difficult to segment them. <br/>
