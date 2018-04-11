@@ -226,13 +226,15 @@ Synthia_rand_cityscapes differs on the scene. There are groups of the same scene
 <a href="https://drive.google.com/open?id=1edZgYJHvHG2pP6HB3JyrsoBnbzMBM34BMMxj2tPnSik"> U-Net </a>
 
 ### Task C Implement a new network **
+Unet network was implemented inspired by zhixuhao's github repository, adding image mirror padding layer for a full image segmentation network.
+
 ### Task D Train the networks on a different dataset 
 We trained the network with four datasets: Kitti, Cambid, Cityscapes and Synthia Cityscapes. <br/>
 As Kitti and Camvid contain the same number of classes we tried to use the fine tuned weights of fcn8 on Camvid to test the performance in Kitti but we did not obtain good results.  <br/>
 Synthia and Cityscapes also have the same number of classes. The former contains synthetic images, the latter contains real ones.  <br/>
 
 ### Task E Boost the performance of your network
-We tried to do data augmentation on the color channels by adding for each pixel value in every channel a random value of intensity from a uniform distribution with a margin of ±20% but unfortunately did not improve the jaccard metric. <br/>
+We tried to do data augmentation on the color channels by adding for each pixel value in every channel a random value of intensity from a uniform distribution with a margin of ±20% but unfortunately did not improve the jaccard metric. Additionally we implement a weighted cross entropy loss function which take into account classes frequency in the unbalance datasets.<br/>
 
 # === WEEK 7 ===
 
