@@ -232,7 +232,8 @@ As Kitti and Camvid contain the same number of classes we tried to use the fine 
 Synthia and Cityscapes also have the same number of classes. The former contains synthetic images, the latter contains real ones.  <br/>
 
 ### Task E Boost the performance of your network **
-	
+We tried to do data augmentation on the color channels by adding for each pixel value in every channel a random value of intensity from a uniform distribution with a margin of ±20% but unfortunately did not improve the jaccard metric. <br/>
+
 # === WEEK 7 ===
 
 <a href="https://docs.google.com/presentation/d/1UyDUPploPuVOfm0w6wF9Qg0EZMA3YqPD_mxCItuPUZY/edit?usp=sharing"> Final Slides </a>
