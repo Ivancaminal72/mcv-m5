@@ -229,3 +229,6 @@ Synthia_rand_cityscapes differs on the scene. There are groups of the same scene
 ### Task D Train the networks on a different dataset **
 ### Task E Boost the performance of your network **
 	
+# === WEEK 7 ===
+
+<a href="https://docs.google.com/presentation/d/1UyDUPploPuVOfm0w6wF9Qg0EZMA3YqPD_mxCItuPUZY/edit?usp=sharing"> Final Slides </a>
