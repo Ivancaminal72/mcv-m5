@@ -226,7 +226,11 @@ Synthia_rand_cityscapes differs on the scene. There are groups of the same scene
 <a href="https://drive.google.com/open?id=1edZgYJHvHG2pP6HB3JyrsoBnbzMBM34BMMxj2tPnSik"> U-Net </a>
 
 ### Task C Implement a new network **
-### Task D Train the networks on a different dataset **
+### Task D Train the networks on a different dataset 
+We trained the network with four datasets: Kitti, Cambid, Cityscapes and Synthia Cityscapes. <br/>
+As Kitti and Camvid contain the same number of classes we tried to use the fine tuned weights of fcn8 on Camvid to test the performance in Kitti but we did not obtain good results.  <br/>
+Synthia and Cityscapes also have the same number of classes. The former contains synthetic images, the latter contains real ones.  <br/>
+
 ### Task E Boost the performance of your network **
 	
 # === WEEK 7 ===
