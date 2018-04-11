@@ -231,7 +231,7 @@ We trained the network with four datasets: Kitti, Cambid, Cityscapes and Synthia
 As Kitti and Camvid contain the same number of classes we tried to use the fine tuned weights of fcn8 on Camvid to test the performance in Kitti but we did not obtain good results.  <br/>
 Synthia and Cityscapes also have the same number of classes. The former contains synthetic images, the latter contains real ones.  <br/>
 
-### Task E Boost the performance of your network **
+### Task E Boost the performance of your network
 We tried to do data augmentation on the color channels by adding for each pixel value in every channel a random value of intensity from a uniform distribution with a margin of ±20% but unfortunately did not improve the jaccard metric. <br/>
 
 # === WEEK 7 ===
