@@ -120,10 +120,13 @@ def random_channel_shift(x, intensity, channel_axis=0):
 
     # for each channel seprate distribution
     numberOfChannels = np.shape(x)[0]
-    channel_images = [np.clip(x[i] + np.random.uniform(-intensity[i], intensity[i]), np.min(x[i]), np.max(x[i]))
-                      for i in range(numberOfChannels)]
+    channel_images = [np.clip(x[i] + np.random.uniform(-intensity[i], intensity[i]),
+                    np.min(x[i]), np.max(x[i])) for i in range(numberOfChannels)]
+                    #min_x[i], max_x[i]) for i in range(numberOfChannels)]
+
     x = np.stack(channel_images, axis=0)
     x = np.rollaxis(x, 0, channel_axis + 1)
+    #x = np.rollaxis(x, 0, channel_axis)
     return x
 
 def transform_matrix_offset_center(matrix, x, y):
@@ -952,22 +955,23 @@ class ImageDataGenerator(object):
         # Compute class balance segmentation
         if cb_weights_method:
             # Get file names
-            file_names = get_filenames(gt_directory)
+            file_names = os.listdir(gt_directory)
 
             # Count the number of samples of each class
             count_per_label = np.zeros(n_classes + len(void_labels))
             total_count_per_label = np.zeros(n_classes + len(void_labels))
-
+            print(gt_directory)
+            print('+++++++++++++++++++++++++++++++++++++')
             # Process each file
-            for file_name in file_names:
-                # Load image and mask
-                mask = io.imread(file_name)
-                mask = mask.astype('int32')
-                print(file_name)
-                # Count elements
-                unique_labels, counts_label = np.unique(mask, return_counts=True)
-                count_per_label[unique_labels] += counts_label
-                total_count_per_label[unique_labels] += np.sum(counts_label[:n_classes])
+            for file_name in os.listdir(gt_directory):
+                if has_valid_extension(file_name):
+                    # Load image and mask
+                    mask = io.imread(os.path.join(gt_directory,file_name))
+                    mask = mask.astype('int32')
+                    # Count elements
+                    unique_labels, counts_label = np.unique(mask, return_counts=True)
+                    count_per_label[unique_labels] += counts_label
+                    total_count_per_label[unique_labels] += np.sum(counts_label[:n_classes])
 
             # Remove void class
             count_per_label = count_per_label[:n_classes]
@@ -980,7 +984,7 @@ class ImageDataGenerator(object):
             # Compute the weights
             self.weights_median_freq_cost = np.median(priors) / priors
             self.weights_rare_freq_cost = 1 / (n_classes * priors)
-
+            self.weights_common_freq_cost = priors
             # print ('Count per label: ' + str(count_per_label))
             # print ('Total count per label: ' + str(total_count_per_label))
             # print ('Prior: ' + str(priors))
@@ -992,7 +996,9 @@ class ImageDataGenerator(object):
                 print ('Weights median_freq_cost: ' + str(self.weights_median_freq_cost))
             elif cb_weights_method == 'rare_freq_cost':
                 self.cb_weights = self.weights_rare_freq_cost
-                print ('Weights rare_freq_cost: ' + str(self.weights_rare_freq_cost))
+            elif cb_weights_method == 'common_freq_cost':
+                self.cb_weights = self.weights_rare_freq_cost
+                print ('Weights rare_freq_cost: ' + str(self.weights_common_freq_cost))
 
             else:
                 raise ValueError('Unknown class balancing method: ' + cb_weights_method)

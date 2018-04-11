@@ -7,7 +7,7 @@ perc_mb2                     = None            # Percentage of data from the sec
 # Model
 model_name                   = 'unet'          # Model to use ['fcn8' | 'lenet' | 'alexNet' | 'vgg16' |  'vgg19' | 'resnet50' | 'InceptionV3']
 freeze_layers_from           = None            # Freeze layers from 0 to this layer during training (Useful for finetunning) [None | 'base_model' | Layer_id]
-show_model                   = False            # Show the architecture layers
+show_model                   = True            # Show the architecture layers
 load_imageNet                = False            # Load Imagenet weights and normalize following imagenet procedure
 load_pretrained              = False           # Load a pretrained model for doing finetuning
 weights_file                 = 'weights.hdf5'  # Training weight file name
@@ -76,8 +76,8 @@ plotHist_enabled             = True            # Enable the Callback
 plotHist_verbose             = 0               # Verbosity of the callback
 
 # Callback LR decay scheduler
-lrDecayScheduler_enabled     = True           # Enable the Callback
-lrDecayScheduler_epochs      = [3,15, 30,100]     # List of epochs were decay is applied or None for all epochs
+lrDecayScheduler_enabled     = False           # Enable the Callback
+lrDecayScheduler_epochs      = [15, 30,100]     # List of epochs were decay is applied or None for all epochs
 lrDecayScheduler_rate        = 2               # Decay rate (new_lr = lr / decay_rate). Usually between 2 and 10.
 
 # Callback learning rate scheduler

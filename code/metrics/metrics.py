@@ -31,10 +31,12 @@ def cce_flatt(void_class, weights_class):
         print(np.shape(y_pred))
         #print('categorical_crossentropy_flatt')
         if dim_ordering == 'th':
-            y_pred = K.permute_dimensions(y_pred, (0, 2, 3, 1))
+            y_pred = K.permute_dimensions(y_pred, (0, 2, 1))
+            #y_pred = K.permute_dimensions(y_pred, (0, 2, 3, 1))
         shp_y_pred = K.shape(y_pred)
-        y_pred = K.reshape(y_pred, (shp_y_pred[0]*shp_y_pred[1]*shp_y_pred[2],
-                           shp_y_pred[3]))  # go back to b01,c
+        #y_pred = K.reshape(y_pred, (shp_y_pred[0]*shp_y_pred[1]*shp_y_pred[2],
+                           #shp_y_pred[3]))  # go back to b01,c
+        y_pred = K.reshape(y_pred, (shp_y_pred[0]*shp_y_pred[1],shp_y_pred[2]))  # go back to b01,c
         # shp_y_true = K.shape(y_true)
 
         if dim_ordering == 'th':
@@ -60,8 +62,8 @@ def cce_flatt(void_class, weights_class):
             y_true = T.extra_ops.to_one_hot(y_true, nb_class=y_pred.shape[-1])
         else:
             y_true = tf.one_hot(y_true, K.shape(y_pred)[-1], on_value=1, off_value=0, axis=None, dtype=None, name=None)
-            y_true = K.cast(y_true, 'float32')  # b,01 -> b01
-        out = K.categorical_crossentropy(y_pred, y_true)
+            #y_true = K.cast(y_true, 'float32')  # b,01 -> b01
+        out = K.categorical_crossentropy(y_pred, K.cast(y_true, 'float32'))
 
         # Class balancing
         if weights_class is not None:
@@ -77,28 +79,51 @@ def pix_weight_loss(void_class, weights_class):
     def categorical_crossentropy_weighted(y_true, y_pred):
         '''Expects a binary class matrix instead of a vector of scalar classes.
         '''
-        print(np.shape(y_true))
-        print(weights_class)
+        out = K.categorical_crossentropy(y_pred, y_true)
+
+        y_true_hot = tf.one_hot(K.cast(y_true,'int32'), K.shape(y_pred)[-1], on_value=1, off_value=0, axis=None, dtype='int32', name=None)
+        y_true_hot = K.flatten(y_true_hot)
+        out1 = K.flatten(out)
+
+        #print(weights_class)
         #print('categorical_crossentropy_flatt')
         #if dim_ordering == 'th':
 
         # remove void classes from cross_entropy
 
-        out = K.categorical_crossentropy(y_pred, y_true)
+
         if weights_class is None:
             return(K.mean(out))
         weight_map = K.zeros_like(out)
-        print(weight_map)
+        #tmp = out
+        #print(weight_map)
+        b = tf.constant(0,dtype='float32')
+
         for i in range(len(weights_class)):
-            weight_map[y_true==i]=weights_class[i]
-        out =K.tf.multiply(out, weight_map)
+
+            Idx = tf.squeeze(tf.where(K.tf.equal(y_true_hot,tf.multiply(K.ones_like(y_true_hot,dtype='int32'),K.variable(i,dtype='int32')))),-1)
+            #c = tf.count
+            n_b = tf.reduce_sum(tf.multiply(tf.gather(out1,Idx,name=None),K.variable(weights_class[i],dtype='float32')))
+            #n_b = tf.div(n_b,tf.clip_by_value(tf.cast(tf.count_nonzero(Idx),'float32'),tf.cast(1,'float32'),tf.cast(1e+20,'float32')))
+
+            b = tf.reduce_sum(tf.stack([b,n_b]))
+            #b = tf.stack([b,n_b])
+            #b = K.sum([n_b,b])
+
+
+            #a[Idx] = out1[Idx]
+            #weight_map = weight_map[Idx].assign(tmp[Idx])
+        #print('\n\n\n\n?????????????????????????????????\n\n\n\n')
+        #print(weight_map)
+        #out =K.tf.multiply(out, weight_map)
+        #print(out.shape)
         # Class balancing
         # if weights_class is not None:
         #     weights_class_var = K.variable(value=weights_class)
         #     class_balance_w = weights_class_var[y_true].astype(K.floatx())
         #     out = out * class_balance_w
-
-        return K.sum(out)  # b01 -> b,01
+        clip_v = tf.constant(1,dtype='int32')
+        return tf.div(b,tf.cast(tf.count_nonzero(tf.clip_by_value(y_true_hot,clip_v,clip_v)),'float32')) # b01 -> b,01
     return categorical_crossentropy_weighted
 
 

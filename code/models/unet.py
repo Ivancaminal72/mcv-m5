@@ -168,22 +168,22 @@ def build_unet_mirror(img_shape=(368, 464, 3), nclasses=8, l2_reg=0.,
     #print "crop2 shape:",crop2.shape
     pool2 = MaxPooling2D(pool_size=(2, 2))(conv2)
     #print "pool2 shape:",pool2.shape
-    conv3 = Conv2D(256, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(pool2)
-    conv3 = Conv2D(256, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(conv3)
+    conv3 = Conv2D(256, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'random_uniform')(pool2)
+    conv3 = Conv2D(256, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'random_uniform')(conv3)
     #print "conv3 shape:",conv3.shape
     crop3 = Cropping2D(cropping=((16,16),(16,16)))(conv3)
     #print "crop3 shape:",crop3.shape
     pool3 = MaxPooling2D(pool_size=(2, 2))(conv3)
-    conv4 = Conv2D(512, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(pool3)
-    conv4 = Conv2D(512, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(conv4)
+    conv4 = Conv2D(512, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'random_uniform')(pool3)
+    conv4 = Conv2D(512, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'random_uniform')(conv4)
     drop4 = Dropout(0.5)(conv4)
     #print "conv4 shape:",conv4.shape
     crop4 = Cropping2D(cropping=((4,4),(4,4)))(drop4)
     #print "crop4 shape:",crop4.shape
     pool4 = MaxPooling2D(pool_size=(2, 2))(drop4)
     #print "pool4 shape:",pool4.shape
-    conv5 = Conv2D(1024, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(pool4)
-    conv5 = Conv2D(1024, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(conv5)
+    conv5 = Conv2D(1024, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'random_uniform')(pool4)
+    conv5 = Conv2D(1024, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'random_uniform')(conv5)
     #print "conv5 shape:",conv5.shape
     drop5 = Dropout(0.5)(conv5)
 
@@ -193,30 +193,30 @@ def build_unet_mirror(img_shape=(368, 464, 3), nclasses=8, l2_reg=0.,
     #print "drop5 shape:",drop5.shape
     up6 = UpSampling2D(size=(2,2))(conv5)
     #print "up6 shape:",up6.shape
-    up6 = Conv2D(1024, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size=(2,2))(conv5))
+    up6 = Conv2D(1024, 2, activation = 'relu', padding = 'same', kernel_initializer = 'random_uniform')(UpSampling2D(size=(2,2))(conv5))
     #print "up6 shape:",up6.shape
     #print "crop4 shape:",crop4.shape
     merge6 = concatenate([crop4,up6], axis = 3)
 
-    conv6 = Conv2D(512, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(merge6)
-    conv6 = Conv2D(512, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(conv6)
+    conv6 = Conv2D(512, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'random_uniform')(merge6)
+    conv6 = Conv2D(512, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'random_uniform')(conv6)
     #print "conv6 shape:",conv6.shape
-    up7 = Conv2D(256, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(conv6))
+    up7 = Conv2D(256, 2, activation = 'relu', padding = 'same', kernel_initializer = 'random_uniform')(UpSampling2D(size = (2,2))(conv6))
     #print "up7 shape:",up7.shape
     merge7 = concatenate([crop3,up7], axis = 3)
-    conv7 = Conv2D(256, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(merge7)
-    conv7 = Conv2D(256, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(conv7)
-    up8 = Conv2D(128, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(conv7))
+    conv7 = Conv2D(256, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'random_uniform')(merge7)
+    conv7 = Conv2D(256, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'random_uniform')(conv7)
+    up8 = Conv2D(128, 2, activation = 'relu', padding = 'same', kernel_initializer = 'random_uniform')(UpSampling2D(size = (2,2))(conv7))
     #print "up8 shape:",up8.shape
     merge8 = concatenate([crop2,up8], axis = 3)
-    conv8 = Conv2D(128, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(merge8)
-    conv8 = Conv2D(128, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(conv8)
-    up9 = Conv2D(64, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(conv8))
+    conv8 = Conv2D(128, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'random_uniform')(merge8)
+    conv8 = Conv2D(128, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'random_uniform')(conv8)
+    up9 = Conv2D(64, 2, activation = 'relu', padding = 'same', kernel_initializer = 'random_uniform')(UpSampling2D(size = (2,2))(conv8))
     #print "up9 shape:",up9.shape
     merge9 = concatenate([crop1,up9], axis = 3)
-    conv9 = Conv2D(64, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(merge9)
-    conv9 = Conv2D(64, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(conv9)
-    o = Conv2D(nclasses, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv9)
+    conv9 = Conv2D(64, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'random_uniform')(merge9)
+    conv9 = Conv2D(64, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'random_uniform')(conv9)
+    o = Conv2D(nclasses, 3, activation = 'relu', padding = 'same', kernel_initializer = 'random_uniform')(conv9)
 	#o = Conv2D(nclasses, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv9)
 	#o = Conv2D(1, 1, activation = 'sigmoid')(conv9) # last classification layer in the original article --
     curlayer_output_shape = Model(input = img_input, output = o).output_shape
