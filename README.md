@@ -239,3 +239,5 @@ We tried to do data augmentation on the color channels by adding for each pixel 
 # === WEEK 7 ===
 
 <a href="https://docs.google.com/presentation/d/1UyDUPploPuVOfm0w6wF9Qg0EZMA3YqPD_mxCItuPUZY/edit?usp=sharing"> Final Slides </a>
+
+<a href="https://www.overleaf.com/read/gdvggkpbcnmd"> Report </a>
