@@ -1,8 +1,4 @@
-# === WEEK 1 ===
-## Title of the project 
-M5 Project: Scene Understanding for Autonomous Vehicles
-
-## Name of the group 
+# Scene Understanding for Autonomous Vehicles
 Team 9 (also known as למלם, pronounced "Lam Lam")
 
 ## Name and contact email of all the team members 
@@ -10,6 +6,8 @@ Lorenzo Betto: smemo23@gmail.com <br/>
 Noa Mor: noamor87@gmail.com  <br/>
 Ana Caballero Cano: ana.caballero.cano@gmail.com  <br/>
 Ivan Caminal Colell: ivancaminal72@gmail.com  <br/>
+
+# === WEEK 1 ===
 
 ## Short abstract about the project (2 lines max) 
 The goal of the project is to perform object detection, segmentation and recognition using Deep Learning in the context of scene understanding for autonomous vehicles. The network's goal will be to successfully compute the aforementioned tasks on classes like pedestrians, vehicles, road, etc. <br/>
