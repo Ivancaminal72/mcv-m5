@@ -4,8 +4,8 @@ Team 9 (also known as למלם, pronounced "Lam Lam")
 ## Name and contact email of all the team members 
 Lorenzo Betto: smemo23@gmail.com <br/>
 Noa Mor: noamor87@gmail.com  <br/>
-Ana Caballero Cano: ana.caballero.cano@gmail.com  <br/>
-Ivan Caminal Colell: ivancaminal72@gmail.com  <br/>
+Ana Caballero: ana.caballero.cano@gmail.com  <br/>
+Ivan Caminal: ivancaminal72@gmail.com  <br/>
 
 # === WEEK 1 ===
 
